@@ -17,11 +17,15 @@
 
 @layer base {
   body {
-    @apply bg-luxury-black text-white font-sans antialiased selection:bg-luxury-gold selection:text-black;
+    @apply bg-luxury-black text-white font-sans antialiased selection:bg-luxury-gold selection:text-black overflow-x-hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display;
+  }
+
+  img {
+    @apply max-w-full h-auto;
   }
 }
 
@@ -63,6 +67,22 @@
     border: 1px solid rgba(212, 175, 55, 0.2);
   }
 
+  /* Optimized effects for mobile */
+  @media (max-width: 768px) {
+    .glass, .glass-gold, .premium-blur, .backdrop-blur-xl {
+      backdrop-filter: blur(4px) !important;
+    }
+    
+    .divine-glow, .animate-divine, .animate-mythic, .animate-legendary, .animate-epic {
+      box-shadow: none !important;
+      animation: none !important;
+    }
+
+    .hero-glow-optimized {
+      filter: blur(60px) !important;
+    }
+  }
+
   .divine-glow {
     box-shadow: 0 0 50px rgba(212, 175, 55, 0.2);
     border: 1px solid #D4AF37;
@@ -75,6 +95,43 @@
   .vertical-text {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes divine-pulse {
+    0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.4), 0 0 40px rgba(212, 175, 55, 0.2); }
+    50% { box-shadow: 0 0 40px rgba(255, 255, 255, 0.6), 0 0 70px rgba(212, 175, 55, 0.4); }
+  }
+
+  @keyframes mythic-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); filter: hue-rotate(0deg); }
+    50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.5); filter: hue-rotate(45deg); }
+  }
+
+  @keyframes legendary-pulse {
+    0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+    50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.7); }
+  }
+
+  @keyframes epic-pulse {
+    0%, 100% { box-shadow: 0 0 15px rgba(168, 85, 247, 0.3); }
+    50% { box-shadow: 0 0 30px rgba(168, 85, 247, 0.6); }
+  }
+
+  .animate-divine { animation: divine-pulse 4s ease-in-out infinite; }
+  .animate-mythic { animation: mythic-glow 5s linear infinite; }
+  .animate-legendary { animation: legendary-pulse 3s ease-in-out infinite; }
+  .animate-epic { animation: epic-pulse 3s ease-in-out infinite; }
+
+  .perspective-1000 {
+    perspective: 1000px;
   }
 }
 

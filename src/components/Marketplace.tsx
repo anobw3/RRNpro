@@ -3,17 +3,18 @@ import { ShoppingCart, ExternalLink, Users, Database, ShieldCheck } from "lucide
 import { NFT_COLLECTION } from "../constants";
 import { useWallet } from "../context/WalletContext";
 import { useTranslation } from "../context/LanguageContext";
+import { NFTImage } from "./nft/NFTCard";
 
 export default function Marketplace() {
   const { isConnected, ownedNfts } = useWallet();
   const { t, language } = useTranslation();
 
   return (
-    <section id="marketplace" className="section-padding bg-luxury-black relative overflow-hidden">
+    <div id="marketplace" className="py-24 relative overflow-hidden">
       {/* Dynamic Background */}
       <div className="absolute top-0 inset-inline-end-0 w-1/2 h-full bg-luxury-gold/5 blur-[120px] -translate-y-1/2 translate-x-1/3 rtl:-translate-x-1/3 opacity-30" />
       
-      <div className="max-w-screen-2xl mx-auto relative z-10">
+      <div className="w-full relative z-10">
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 md:mb-24 gap-8 md:gap-12">
           <motion.div
             initial={{ opacity: 0, x: language === 'ar' ? 50 : -50 }}
@@ -49,11 +50,10 @@ export default function Marketplace() {
                 <div className="p-6">
                   {/* Image Area */}
                   <div className="relative aspect-square rounded-[2rem] overflow-hidden mb-6">
-                    <img 
+                    <NFTImage 
                       src={item.image} 
                       alt={`${item.name} ${item.outfit}`}
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      referrerPolicy="no-referrer"
                     />
                     <div className="absolute top-4 inset-inline-end-4 px-3 py-1 glass rounded-full text-[8px] font-bold tracking-widest uppercase text-white/80 border border-white/10 z-10">
                       {t("marketplace.supply")}: {item.supply}
@@ -153,6 +153,6 @@ export default function Marketplace() {
            </button>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,17 +1,25 @@
 import { motion } from "motion/react";
 import { ArrowRight, Play } from "lucide-react";
-import { NFT_IMAGES } from "../assets/images";
+import { NFT_COLLECTION } from "../constants";
 import { useTranslation } from "../context/LanguageContext";
+import Container from "../layout/Container";
+
+import { NFTImage } from "./nft/NFTCard";
 
 export default function Hero() {
   const { t } = useTranslation();
+  const featuredNFT = NFT_COLLECTION[0]; // Usually Aceh Ulee Balang
 
   return (
-    <section id="hero" className="relative min-h-[100vh] lg:min-h-screen flex items-center justify-center pt-24 pb-20 px-6 sm:px-12 section-padding overflow-hidden">
+    <section id="hero" className="relative min-h-[100vh] flex items-center justify-center pt-24 pb-20 overflow-hidden">
+      {/* Dynamic Background Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl bg-luxury-gold/10 blur-[150px] hero-glow-optimized rounded-full pointer-events-none opacity-50 z-0 animate-pulse" />
+      <div className="absolute top-1/4 left-3/4 w-96 h-96 bg-luxury-purple/10 blur-[120px] hero-glow-optimized rounded-full pointer-events-none opacity-30 z-0 animate-bounce" style={{ animationDuration: '8s' }} />
+
       {/* Grid Decal */}
       <div className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: "radial-gradient(#D4AF37 1.5px, transparent 1.5px)", backgroundSize: "60px 60px" }} />
       
-      <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 lg:gap-20 items-center z-10">
+      <Container className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center z-10">
         <motion.div 
           className="flex flex-col gap-6 md:gap-8 text-center lg:text-start order-2 lg:order-first"
           initial={{ opacity: 0, y: 30 }}
@@ -58,7 +66,7 @@ export default function Hero() {
               <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40 font-bold">{t("hero.stats_units")}</span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-luxury-gold text-2xl md:text-3xl font-display">8.5 ETH</span>
+              <span className="text-luxury-gold text-2xl md:text-3xl font-display">{featuredNFT.price} ETH</span>
               <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-white/40 font-bold">Floor Price</span>
             </div>
             <div className="flex flex-col gap-1">
@@ -70,70 +78,98 @@ export default function Hero() {
 
         {/* Featured Card Display */}
         <motion.div 
-          className="relative flex items-center justify-center"
+          className="relative flex items-center justify-center p-4 sm:p-0"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1, delay: 0.2 }}
         >
-          {/* Decorative Rings */}
-          <div className="absolute w-[120%] aspect-square border border-luxury-gold/10 rounded-full animate-[spin_20s_linear_infinite]" />
-          <div className="absolute w-[140%] aspect-square border border-luxury-purple/5 rounded-full animate-[spin_30s_linear_infinite_reverse]" />
+          {/* Decorative Rings - Hidden on small mobile to save CPU */}
+          <div className="absolute w-[120%] aspect-square border border-luxury-gold/10 rounded-full animate-[spin_20s_linear_infinite] hidden md:block" />
+          <div className="absolute w-[140%] aspect-square border border-luxury-purple/5 rounded-full animate-[spin_30s_linear_infinite_reverse] hidden md:block" />
           
           <motion.div 
-            className="relative w-full max-w-[380px] aspect-[3/4.5] glass-gold divine-glow overflow-hidden flex flex-col rounded-[2.5rem] shadow-2xl ring-1 ring-luxury-gold/30"
-            animate={{ y: [0, -20, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="relative w-full max-w-[280px] sm:max-w-[380px] glass-gold divine-glow overflow-hidden flex flex-col rounded-[2.5rem] shadow-2xl ring-1 ring-luxury-gold/30"
+            animate={typeof window !== 'undefined' && window.innerWidth > 768 ? { 
+              y: [0, -25, 0],
+              rotate: [0, 2, -2, 0],
+              filter: ["drop-shadow(0 0 20px rgba(212,175,55,0.2))", "drop-shadow(0 0 40px rgba(212,175,55,0.4))", "drop-shadow(0 0 20px rgba(212,175,55,0.2))"]
+            } : {}}
+            transition={{ 
+              duration: 8, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
           >
-            <div className="relative h-2/3 bg-gradient-to-b from-[#1A1A23] to-luxury-black overflow-hidden group">
-              <img 
-                src={NFT_IMAGES.HERO_SOVEREIGN} 
-                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" 
-                referrerPolicy="no-referrer"
-                alt="Featured Sovereign"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-luxury-black via-transparent to-transparent opacity-80" />
+            {/* Image Area - Clean & Taller with Head Visible */}
+            <div className="relative aspect-[4/5] min-h-[280px] sm:min-h-[360px] bg-gradient-to-b from-[#1A1A23] to-[#0a0a0a] overflow-hidden group flex items-start justify-center pt-8 sm:pt-12 px-6">
+              <div className="relative w-full h-full flex items-center justify-center overflow-visible">
+                <NFTImage 
+                  src={featuredNFT.image} 
+                  className="w-full h-full transition-transform duration-1000 md:group-hover:scale-[1.02]" 
+                  alt={featuredNFT.name}
+                />
+              </div>
               
-              <div className="absolute top-6 inset-inline-end-6 px-3 py-1 glass rounded-full text-[8px] font-bold tracking-widest text-luxury-gold flex items-center gap-2">
+              {/* Subtle Gradient Shadow for bottom depth without cutting head */}
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent z-10" />
+              
+              <div className="absolute top-6 inset-inline-end-6 px-3 py-1 glass rounded-full text-[8px] font-bold tracking-[0.2em] text-luxury-gold flex items-center gap-2 z-20">
                 <span className="w-1.5 h-1.5 bg-luxury-gold rounded-full animate-pulse" />
                 LIVE AUCTION
               </div>
-
-              <div className="absolute bottom-6 inset-inline-start-6 inset-inline-end-6">
-                <div className="text-[10px] uppercase tracking-widest text-luxury-gold mb-1 font-bold">Divine Raccoon</div>
-                <div className="text-3xl font-display text-white">Royal Raccoon Aceh</div>
-                <div className="text-xs text-white/60 italic font-light">Ulee Balang Costume</div>
-              </div>
             </div>
 
-            <div className="p-8 flex flex-col gap-4 flex-1 justify-center">
-              <div className="flex justify-between items-center text-[10px] tracking-widest uppercase text-white/50 font-bold">
-                <span>Biological Integrity</span>
-                <span className="text-luxury-gold">99.9%</span>
+            {/* Info Section - Now clearly separated below image */}
+            <div className="p-8 pb-10 flex flex-col gap-6 flex-1 bg-[#0a0a0a] z-20 border-t border-white/5">
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <div className="text-[10px] uppercase tracking-[0.2em] text-luxury-gold font-bold">
+                    {featuredNFT.rarity} Raccoon
+                  </div>
+                  <div className="text-[10px] text-white/30 font-mono tracking-tighter">
+                    #0{featuredNFT.id}
+                  </div>
+                </div>
+                <h3 className="text-2xl sm:text-4xl font-display text-white leading-none tracking-tight uppercase mb-1">
+                  {featuredNFT.name}
+                </h3>
+                <p className="text-xs text-white/50 italic font-light tracking-wide">
+                  {featuredNFT.outfit} Costume
+                </p>
               </div>
-              <div className="h-1.5 bg-white/5 w-full rounded-full overflow-hidden">
-                 <motion.div 
-                   className="h-full bg-gradient-to-r from-luxury-purple via-luxury-gold to-luxury-gold"
-                   initial={{ width: 0 }}
-                   whileInView={{ width: '99.9%' }}
-                   transition={{ duration: 2, delay: 1 }}
-                  />
+
+              <div className="space-y-4">
+                <div className="flex justify-between items-center text-[9px] tracking-[0.1em] uppercase text-white/40 font-bold">
+                  <span>Biological Integrity</span>
+                  <span className="text-luxury-gold">99.9%</span>
+                </div>
+                <div className="h-1.5 bg-white/5 w-full rounded-full overflow-hidden">
+                   <motion.div 
+                     className="h-full bg-gradient-to-r from-luxury-purple via-luxury-gold to-luxury-gold"
+                     initial={{ width: 0 }}
+                     whileInView={{ width: '99.9%' }}
+                     transition={{ duration: 2, delay: 1 }}
+                    />
+                </div>
               </div>
-              <div className="mt-4 p-4 rounded-xl border border-white/5 bg-white/[0.03] flex justify-between items-center">
-                <div className="flex flex-col">
-                  <span className="text-[10px] text-white/40 uppercase tracking-widest">Heritage Code</span>
-                  <span className="text-sm font-bold tracking-tighter">NUS-GEN-001</span>
+
+              <div className="mt-auto pt-6 flex justify-between items-center border-t border-white/5">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] text-white/30 uppercase tracking-[0.15em] font-bold">Heritage Code</span>
+                  <span className="text-sm font-bold tracking-tighter text-white/90">NUS-GEN-{featuredNFT.id.padStart(3, '0')}</span>
                 </div>
                 <motion.div 
-                  className="w-10 h-10 glass rounded-full flex items-center justify-center cursor-pointer hover:border-luxury-gold/50"
-                  whileHover={{ scale: 1.1 }}
+                  className="w-12 h-12 glass border border-white/10 rounded-full flex items-center justify-center cursor-pointer hover:border-luxury-gold/50 transition-all shadow-xl"
+                  whileHover={{ scale: 1.1, backgroundColor: "rgba(212,175,55,0.1)" }}
+                  whileTap={{ scale: 0.9 }}
                 >
-                  <ArrowRight className="w-4 h-4 text-luxury-gold rtl:rotate-180" />
+                  <ArrowRight className="w-5 h-5 text-luxury-gold rtl:rotate-180" />
                 </motion.div>
               </div>
             </div>
           </motion.div>
         </motion.div>
-      </div>
+      </Container>
 
       {/* Background Section indicators */}
       <div className="absolute inset-inline-end-0 bottom-40 vertical-text hidden xl:block opacity-20 pointer-events-none">

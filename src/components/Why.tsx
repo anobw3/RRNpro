@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import { Shield, Globe, Cpu } from "lucide-react";
 import { NFT_IMAGES } from "../assets/images";
+import { NFTImage } from "./nft/NFTCard";
 
 export default function WhySection() {
   const values = [
@@ -22,8 +23,8 @@ export default function WhySection() {
   ];
 
   return (
-    <section className="py-24 md:py-32 px-6 lg:px-12 bg-white/[0.02]">
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
+    <div className="py-24 relative">
+      <div className="w-full grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
         <motion.div
            initial={{ opacity: 0, x: -30 }}
            whileInView={{ opacity: 1, x: 0 }}
@@ -67,11 +68,10 @@ export default function WhySection() {
         >
           <div className="absolute inset-0 bg-luxury-purple/20 rounded-[4rem] blur-[100px] animate-pulse" />
           <div className="relative z-10 w-full h-full glass rounded-[4rem] overflow-hidden border border-white/5 shadow-2xl">
-             <img 
+             <NFTImage 
                 src={NFT_IMAGES.VISION_ART} 
                 alt="Digital Art Vision" 
                 className="w-full h-full object-cover opacity-60 transition-opacity duration-1000 group-hover:opacity-100"
-                referrerPolicy="no-referrer"
              />
              <div className="absolute inset-0 bg-gradient-to-t from-luxury-black via-transparent to-transparent" />
              <div className="absolute bottom-16 left-16 right-16">
@@ -91,6 +91,6 @@ export default function WhySection() {
           </motion.div>
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

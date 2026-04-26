@@ -3,8 +3,8 @@ import { ROADMAP } from "../constants.ts";
 
 export default function Roadmap() {
   return (
-    <section id="roadmap" className="py-24 md:py-32 px-6 lg:px-12 overflow-hidden border-t border-white/5">
-      <div className="max-w-7xl mx-auto">
+    <div id="roadmap" className="py-24 relative overflow-hidden border-t border-white/5">
+      <div className="w-full">
         <div className="mb-24 flex flex-col md:flex-row justify-between items-center gap-8">
           <div>
             <h2 className="font-display text-5xl md:text-7xl mb-4 tracking-tight">THE STRATEGIC<br/>TRAJECTORY</h2>
@@ -74,6 +74,6 @@ export default function Roadmap() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

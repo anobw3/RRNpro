@@ -5,7 +5,10 @@
 
 export const NFT_IMAGES = {
   // 1. Royal Raccoon -> Aceh (Ulee Balang)
-  ACEH: "https://gateway.pinata.cloud/ipfs/bafybeiahno5qt4oernxv7vd5jfjwj7pbkdnvr74oasssotmk6swak72fna/Aceh-uleebalang.png",
+  ACEH: "https://gateway.pinata.cloud/ipfs/bafkreih4gyec3lyqr53hrbkw4p3nz4dovmaxvj7azh2rnwncqwchxe6nye",
+  
+  // Royal Raccoon -> Gayo (Kerawang Gayo)
+  GAYO: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeidgii35hrfumi5xi2cdi5p3lhlmmzjbsizkpr2vpugy35j35k6m7q",
   
   // 2. Royal Raccoon -> Batak (Ulos)
   BATAK: "https://picsum.photos/seed/batak/800/1000",
@@ -14,7 +17,7 @@ export const NFT_IMAGES = {
   MINANG: "https://picsum.photos/seed/minang/800/1000",
   
   // 4. Royal Raccoon -> Riau (Melayu Riau)
-  RIAU: "https://picsum.photos/seed/riau/800/1000",
+  RIAU: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeicrnv5qc2f5v2ldve43hrxjsspke6vhf5l7lt5wtggbcn5jl6r7im",
   
   // 5. Royal Raccoon -> Riau Islands (Teluk Belanga)
   RIAU_ISLANDS: "https://picsum.photos/seed/riauislands/800/1000",
@@ -35,23 +38,23 @@ export const NFT_IMAGES = {
   LAMPUNG: "https://picsum.photos/seed/lampung/800/1000",
   
   // Java
-  JAKARTA: "https://picsum.photos/seed/jakarta/800/1000",
-  JAVA: "https://picsum.photos/seed/java/800/1000",
-  SUNDA: "https://picsum.photos/seed/sunda/800/1000",
-  BALI: "https://picsum.photos/seed/bali/800/1000",
+  JAKARTA: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeighynsme4q6ck2jjk67pmonbuumrt3j6hgemakpea6ugy4y6kapby",
+  JAVA: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeiar7mv7kxcae4eieywr3r4x6e4tprmjvkyoqnqm3m63yutij4uptm",
+  SUNDA: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeigffyjshvdcghps7xfg7p45fu3a62ulij7b35bvxgupgdap7ecgeu",
+  BALI: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeiaq6mncgisey4remtmlgo4cw3dhqzq2xilbptan32e7nit3w5kp6e",
   
   // Kalimantan
-  DAYAK: "https://gateway.pinata.cloud/ipfs/bafybeigji47oh6uqfqojtnkwgvkgkemvtyatraetz6bdbappp7dtvtbf7a",
+  DAYAK: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeibuj2u55fapgupt6aswug3lgd2ep5ri3k4oci5flc3ptq4tozgnqu",
   BANJAR: "https://picsum.photos/seed/banjar/800/1000",
   
   // Sulawesi
-  BUGIS: "https://picsum.photos/seed/bugis/800/1000",
-  TORAJA: "https://picsum.photos/seed/toraja/800/1000",
+  BUGIS: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeig3hmjj2ecixvpalqrr7l6v34oa7h4sryvn6p2ovrmdnxgfrn6kc4",
+  TORAJA: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeid6korfogpkm662qn6wa74nzqxw3sojomcfxwugatopcw64m2bitq",
   
   // Papua & East
-  PAPUA: "https://picsum.photos/seed/papua/800/1000",
+  PAPUA: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeidy7dmqhsepslok7zih5qednvtk764ngei25b545loci5av6odhla",
   MALUKU: "https://picsum.photos/seed/maluku/800/1000",
-  NTT: "https://picsum.photos/seed/ntt/800/1000",
+  NTT: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeiape2pd6noybzyogeuiguva4bfkzlwyhltysgbbr27zl3zzjyxg74",
   
   // Misc / Hero
   HERO_SOVEREIGN: "https://picsum.photos/seed/royal2/800/1000",

@@ -3,8 +3,8 @@ import { RARITIES } from "../constants.ts";
 
 export default function Rarity() {
   return (
-    <section id="rarity" className="py-24 md:py-32 px-6 lg:px-12 bg-gradient-to-b from-transparent to-luxury-black/30">
-      <div className="max-w-7xl mx-auto">
+    <div id="rarity" className="py-24 relative">
+      <div className="w-full">
         <div className="text-center mb-24">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -62,6 +62,6 @@ export default function Rarity() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

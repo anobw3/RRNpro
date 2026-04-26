@@ -5,6 +5,7 @@ import { useTranslation } from "../context/LanguageContext";
 import { useWallet } from "../context/WalletContext";
 import { Language, LANGUAGES } from "../lib/translations";
 import LanguageSwitcher from "./LanguageSwitcher";
+import Container from "../layout/Container";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -39,11 +40,11 @@ export default function Navbar() {
   return (
     <>
       <nav 
-        className={`fixed top-0 inset-inline-0 transition-all duration-700 z-[100] px-4 sm:px-8 md:px-16 ${
+        className={`fixed top-0 inset-inline-0 transition-all duration-700 z-[100] ${
           scrolled ? "premium-blur border-b border-white/5 py-4" : "bg-transparent py-6 sm:py-10"
         }`}
       >
-        <div className="max-w-screen-2xl mx-auto flex justify-between items-center">
+        <Container maxW="max-w-screen-xl" className="flex justify-between items-center">
           <motion.div 
             className="flex items-center gap-5 cursor-pointer group"
             initial={{ opacity: 0, x: language === 'ar' ? 30 : -30 }}
@@ -121,7 +122,7 @@ export default function Navbar() {
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
           </div>
-        </div>
+        </Container>
 
         {/* Mobile menu */}
         <AnimatePresence>

@@ -1,14 +1,15 @@
 import { Crown, Twitter, Github, MessageCircle } from "lucide-react";
 import { useTranslation } from "../context/LanguageContext";
+import Container from "../layout/Container";
 
 export default function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="section-padding border-t border-white/5 bg-luxury-black relative overflow-hidden">
+    <footer className="py-24 border-t border-white/5 bg-luxury-black relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-t from-luxury-purple/5 to-transparent pointer-events-none" />
       
-      <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start gap-16 relative z-10">
+      <Container className="flex flex-col lg:flex-row justify-between items-center lg:items-start gap-16 relative z-10">
         <div className="flex flex-col items-center lg:items-start gap-8 max-w-sm">
           <div className="flex items-center gap-5">
             <div className="w-12 h-12 border border-luxury-gold rotate-45 flex items-center justify-center bg-luxury-gold transition-all shadow-[0_0_30px_rgba(212,175,55,0.3)]">
@@ -56,7 +57,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
       
       <div className="text-center mt-32 border-t border-white/5 pt-12">
         <p className="text-[9px] tracking-[0.6em] text-white/20 uppercase">

@@ -5,7 +5,7 @@ export default function Lore() {
   const { t } = useTranslation();
 
   return (
-    <section id="lore" className="section-padding relative overflow-hidden bg-luxury-black">
+    <div className="relative py-20 px-4">
       {/* Background Parallax Element */}
       <motion.div 
         style={{ y: "-20%" }}
@@ -63,6 +63,6 @@ export default function Lore() {
       <div className="absolute inset-inline-end-[-10%] top-1/2 -translate-y-1/2 opacity-[0.03] hidden lg:block select-none pointer-events-none">
         <span className="text-[20rem] font-display font-black ltr:-rotate-90 rtl:rotate-90 inline-block">FUTURE</span>
       </div>
-    </section>
+    </div>
   );
 }
