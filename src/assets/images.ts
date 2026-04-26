@@ -5,7 +5,7 @@
 
 export const NFT_IMAGES = {
   // 1. Royal Raccoon -> Aceh (Ulee Balang)
-  ACEH: "https://picsum.photos/seed/aceh/800/1000",
+  ACEH: "https://gateway.pinata.cloud/ipfs/bafybeiahno5qt4oernxv7vd5jfjwj7pbkdnvr74oasssotmk6swak72fna/Aceh-uleebalang.png",
   
   // 2. Royal Raccoon -> Batak (Ulos)
   BATAK: "https://picsum.photos/seed/batak/800/1000",
