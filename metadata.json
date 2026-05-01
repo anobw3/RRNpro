@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "Royal Raccoon Nusantara",
+=======
+  "name": "Nusantara Royal Raccoon",
+>>>>>>> 17e96eb (first commit)
   "description": "A premium NFT collection of Royal Raccoons wearing traditional Indonesian costumes.",
   "requestFramePermissions": [],
   "majorCapabilities": []

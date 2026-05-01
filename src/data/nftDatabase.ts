@@ -138,6 +138,25 @@ export const nftDatabase: Record<string, NFTMetadata[]> = {
         { trait_type: "Tribe", value: "Java" },
         { trait_type: "Status", value: "Noble" }
       ]
+<<<<<<< HEAD
+=======
+    },
+    {
+      id: 50,
+      name: "Avatar of the Ancient Borobudur — Sang Hyang",
+      island: "Java",
+      tribe: "Kalingga",
+      outfit: "Ancestral Gowns",
+      rarity: "Divine",
+      description: "A transcendental being representing the pinnacle of spiritual enlightenment and royal lineage. Embellished with thousand-year-old diamonds.",
+      cultural_meta: "Borobudur Enlightenment, Kalingga Diamonds",
+      image: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeiamfmatbydgbauy5rbalfj3yd3g35ztmwwvtcveza6xqfqxfygm74",
+      attributes: [
+        { trait_type: "Character", value: "Raccoon" },
+        { trait_type: "Island", value: "Java" },
+        { trait_type: "Status", value: "Divine Avatar" }
+      ]
+>>>>>>> 17e96eb (first commit)
     }
   ],
   BALI_NUSA_TENGGARA: [

@@ -57,7 +57,12 @@ export const NFT_IMAGES = {
   NTT: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeiape2pd6noybzyogeuiguva4bfkzlwyhltysgbbr27zl3zzjyxg74",
   
   // Misc / Hero
+<<<<<<< HEAD
   HERO_SOVEREIGN: "https://picsum.photos/seed/royal2/800/1000",
   VISION_ART: "https://picsum.photos/seed/vision/1200/1200?grayscale",
+=======
+  HERO_SOVEREIGN: "https://picsum.photos/seed/sovereign/1000/1200",
+  VISION_ART: "https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafybeicyu2gkw2hztp4ozlxf4un5wxknmmmvmh6tmqomb4ovf5diihxzya",
+>>>>>>> 17e96eb (first commit)
   NOISE_OVERLAY: "https://grainy-gradients.vercel.app/noise.svg"
 };

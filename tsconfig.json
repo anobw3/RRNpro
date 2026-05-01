@@ -21,6 +21,11 @@
       ]
     },
     "allowImportingTsExtensions": true,
+<<<<<<< HEAD
     "noEmit": true
+=======
+    "noEmit": true,
+    "types": ["vite/client"]
+>>>>>>> 17e96eb (first commit)
   }
 }

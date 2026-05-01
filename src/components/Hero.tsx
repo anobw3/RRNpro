@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { motion } from "motion/react";
 import { ArrowRight, Play } from "lucide-react";
 import { NFT_COLLECTION } from "../constants";
@@ -170,6 +171,298 @@ export default function Hero() {
           </motion.div>
         </motion.div>
       </Container>
+=======
+import { useState, useEffect, useCallback, memo } from "react";
+import { motion } from "motion/react";
+import { ArrowRight, Play, Wallet, Zap } from "lucide-react";
+import { NFT_COLLECTION } from "../constants";
+import { useTranslation } from "../context/LanguageContext";
+import { useWallet } from "../context/WalletContext";
+import Container from "../layout/Container";
+
+import NFTCard from "./nft/NFTCard";
+import { nftDatabase } from "../data/nftDatabase";
+import MintModal from "./MintModal";
+
+const Hero = memo(() => {
+  const { t } = useTranslation();
+  const { isConnected, connect, isMinting, mint, totalMinted, maxSupply, mintProgress, error: walletError, mintSuccess, txHash } = useWallet();
+  const featuredNFTMetadata = nftDatabase.JAVA.find(n => n.id === 50) || nftDatabase.SUMATRA[0];
+
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [mintStatus, setMintStatus] = useState<{ isOpen: boolean; status: "success" | "error"; message?: string }>({
+    isOpen: false,
+    status: "success"
+  });
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  // Sync modal when minting completes
+  useEffect(() => {
+    if (mintSuccess) {
+      setMintStatus({
+        isOpen: true,
+        status: "success",
+        message: "Your Spirit has awakened! The Royal Raccoon is now yours."
+      });
+    }
+  }, [mintSuccess]);
+
+  useEffect(() => {
+    if (walletError && isMinting === false && !mintSuccess) {
+      setMintStatus({
+        isOpen: true,
+        status: "error",
+        message: walletError
+      });
+    }
+  }, [walletError, isMinting, mintSuccess]);
+
+  useEffect(() => {
+    // Set landing date to 7 days from now
+    const targetDate = new Date();
+    targetDate.setDate(targetDate.getDate() + 7);
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = targetDate.getTime() - now;
+
+      setTimeLeft({
+        days: Math.max(0, Math.floor(difference / (1000 * 60 * 60 * 24))),
+        hours: Math.max(0, Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))),
+        minutes: Math.max(0, Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))),
+        seconds: Math.max(0, Math.floor((difference % (1000 * 60)) / 1000)),
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleAction = useCallback(async () => {
+    if (isConnected) {
+      console.log("[Hero] Minting item: 1");
+      await mint("1");
+    } else {
+      console.log("[Hero] Connecting wallet");
+      connect();
+    }
+  }, [isConnected, connect, mint]);
+
+  return (
+    <section id="hero" className="w-full flex justify-center px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-28 relative min-h-screen items-center overflow-visible ambient-glow">
+      <MintModal 
+        isOpen={mintStatus.isOpen} 
+        onClose={() => setMintStatus({ ...mintStatus, isOpen: false })} 
+        status={mintStatus.status}
+        message={mintStatus.message}
+        txHash={txHash || undefined}
+      />
+      {/* Dynamic Background Glows */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-4xl max-h-4xl bg-accent-gold-soft blur-[150px] rounded-full pointer-events-none opacity-40 z-0" />
+      <div className="absolute top-1/4 left-3/4 w-96 h-96 bg-accent-gold-soft/10 blur-[120px] rounded-full pointer-events-none opacity-20 z-0" />
+      
+      <div className="w-full max-w-5xl text-center mx-auto z-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col items-center"
+        >
+          {/* TOP LOGO AND BADGE */}
+          <div className="flex flex-col items-center gap-5 mb-10 relative">
+            {/* Fire/Flame Aura Effect */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 pointer-events-none z-0">
+               <motion.div 
+                 animate={{ 
+                   scale: [1, 1.2, 1],
+                   opacity: [0.3, 0.6, 0.3],
+                   rotate: [0, 10, -10, 0]
+                 }}
+                 transition={{ duration: 4, repeat: Infinity }}
+                 className="absolute inset-0 bg-accent-gold-soft/30 blur-[40px] rounded-full"
+               />
+               <motion.div 
+                 animate={{ 
+                   scale: [1.2, 1.4, 1.2],
+                   opacity: [0.2, 0.4, 0.2],
+                   y: [0, -20, 0]
+                 }}
+                 transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                 className="absolute inset-0 bg-accent-gold-soft/20 blur-[50px] rounded-full"
+               />
+               {/* Embers - Reduced for mobile */}
+               {[...Array(isMobile ? 3 : 6)].map((_, i) => (
+                 <motion.div
+                   key={i}
+                   initial={{ opacity: 0, scale: 0 }}
+                   animate={{ 
+                     opacity: [0, 1, 0],
+                     scale: [0, 1, 0],
+                     y: -100 - (Math.random() * 100),
+                     x: (Math.random() - 0.5) * 100
+                   }}
+                   transition={{ 
+                     duration: 2 + Math.random() * 2, 
+                     repeat: Infinity, 
+                     delay: Math.random() * 3 
+                   }}
+                   className="absolute left-1/2 bottom-1/2 w-1 h-1 bg-yellow-400 rounded-full blur-[1px]"
+                 />
+               ))}
+            </div>
+
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ 
+                scale: 1, 
+                opacity: 1,
+                y: [0, -8, 0]
+              }}
+              transition={{ 
+                delay: 0.2, 
+                duration: 1,
+                y: {
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }
+              }}
+              className="w-28 h-28 sm:w-36 sm:h-36 mb-2 relative z-10"
+            >
+              <div className="absolute inset-0 bg-accent-gold-soft blur-[30px] rounded-full animate-pulse" />
+              <img 
+                src="https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafkreig3ck347noh2ur3oi2amnfpubycc7mmdleexjld7ggwpp7paiwwtq" 
+                alt="Nusantara Royal Raccoon" 
+                className="w-full h-full object-contain filter drop-shadow-[0_0_25px_var(--glow)]" 
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              className="flex flex-col items-center mb-4 relative z-10"
+            >
+              <h1 className="text-text-primary text-4xl sm:text-5xl md:text-6xl font-black tracking-[0.3em] font-display leading-tight interactive-gold">
+                {t("hero.title_3")}
+              </h1>
+              <span className="text-accent-gold text-sm sm:text-base font-bold tracking-[0.8em] mt-3 opacity-90 uppercase interactive-gold">
+                {t("hero.title_1")} {t("hero.title_2")}
+              </span>
+            </motion.div>
+
+            <motion.span 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="relative z-10 inline-block px-6 py-2 text-[10px] sm:text-xs tracking-[0.5em] rounded-full border border-border-soft bg-bg-card backdrop-blur-md text-text-primary uppercase font-bold shadow-lg"
+            >
+              {t("hero.badge")}
+            </motion.span>
+          </div>
+
+          {/* TITLE SECTION REMOVED (BROKEN IMAGE) */}
+
+          {/* DESCRIPTION */}
+          <p className="text-sm sm:text-base md:text-lg text-text-secondary max-w-2xl mx-auto mt-6 leading-relaxed balance font-light">
+            {t("hero.description")}
+          </p>
+
+          {/* FEATURED NFT CARD - RELATIVE POSITIONED FOR VISIBILITY */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
+            className="mt-12 relative z-10 w-full max-w-[320px] sm:max-w-[380px] mx-auto flex justify-center items-center overflow-visible"
+            style={{ background: 'transparent' }} // Removed debug red background but kept container stable
+          >
+            <div className="w-full h-full relative z-10 shadow-[0_0_50px_rgba(0,0,0,0.5)] rounded-2xl">
+              <NFTCard 
+                nft={featuredNFTMetadata} 
+                onClick={(nft) => console.log("Hero NFT clicked", nft)}
+                view="grid"
+              />
+            </div>
+          </motion.div>
+
+          {/* PROGRESS BAR */}
+          <div className="mt-10 w-full max-w-xl mx-auto">
+            <div className="flex justify-between text-[10px] sm:text-xs text-text-muted mb-3 tracking-widest font-bold uppercase">
+              <span>{t("marketplace.supply")}</span>
+              <span className="text-accent-gold">{totalMinted} / {maxSupply} {t("marketplace.mint_now")}</span>
+            </div>
+
+            <div className="w-full h-2.5 bg-bg-card rounded-full overflow-hidden p-0.5 border border-border-soft">
+              <motion.div 
+                className="h-full bg-gradient-to-r from-purple-500 to-accent-gold rounded-full shadow-md"
+                initial={{ width: 0 }}
+                animate={{ width: `${mintProgress}%` }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              />
+            </div>
+          </div>
+
+          {/* COUNTDOWN GRID */}
+          <div className="grid grid-cols-4 gap-3 sm:gap-6 mt-10 max-w-md mx-auto text-center w-full">
+            {[
+              { label: t("details.element") === "Element" ? "DAYS" : "HARI", value: timeLeft.days },
+              { label: t("details.element") === "Element" ? "HRS" : "JAM", value: timeLeft.hours },
+              { label: t("details.element") === "Element" ? "MIN" : "MENIT", value: timeLeft.minutes },
+              { label: t("details.element") === "Element" ? "SEC" : "DETIK", value: timeLeft.seconds }
+            ].map((item, idx) => (
+              <div key={idx} className="luxury-card py-3 px-1 shadow-sm dark:shadow-none">
+                <div className="text-xl sm:text-2xl font-bold text-text-primary font-display">
+                  {String(item.value).padStart(2, '0')}
+                </div>
+                <div className="text-[8px] sm:text-[10px] text-text-muted tracking-widest font-bold uppercase mt-1">
+                  {item.label}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* BUTTON */}
+          <div className="mt-12 flex flex-col sm:flex-row justify-center gap-4 text-text-primary">
+            <motion.button 
+              onClick={handleAction}
+              disabled={isMinting}
+              className="btn-gold px-12 py-4 text-xs sm:text-sm tracking-[0.2em] uppercase disabled:opacity-50"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isMinting ? (
+                <span className="flex items-center gap-2">
+                  <Zap className="w-4 h-4 animate-pulse" /> {t("nav.minting")}
+                </span>
+              ) : (
+                <>
+                  <Wallet className="w-4 h-4" />
+                  {isConnected ? t("nav.mint") : t("nav.connect")}
+                </>
+              )}
+            </motion.button>
+            
+            <a href="#collection">
+              <motion.button 
+                className="px-8 sm:px-12 py-4 rounded-full border border-border-soft bg-bg-card hover:bg-bg-secondary text-text-primary font-bold text-xs sm:text-sm tracking-[0.2em] uppercase transition-all duration-300 flex items-center justify-center gap-3 w-full sm:w-auto"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {t("nav.collection")}
+              </motion.button>
+            </a>
+          </div>
+
+          {/* Activity Feed Mini */}
+          <div className="mt-12 flex items-center gap-3 h-6 justify-center opacity-40">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-ping" />
+            <div className="flex animate-marquee-slower whitespace-nowrap gap-8 text-[9px] sm:text-[10px] text-text-secondary uppercase tracking-[0.2em] font-medium italic">
+              <span>User 0x4f...a2 minted Legendary Aceh Raccoon</span>
+              <span>User 0x72...1b minted Epic Bugis Raccoon</span>
+              <span>User 0x1a...9c minted Rare Java Raccoon</span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
+>>>>>>> 17e96eb (first commit)
 
       {/* Background Section indicators */}
       <div className="absolute inset-inline-end-0 bottom-40 vertical-text hidden xl:block opacity-20 pointer-events-none">
@@ -177,4 +470,11 @@ export default function Hero() {
       </div>
     </section>
   );
+<<<<<<< HEAD
 }
+=======
+});
+
+Hero.displayName = "Hero";
+export default Hero;
+>>>>>>> 17e96eb (first commit)
