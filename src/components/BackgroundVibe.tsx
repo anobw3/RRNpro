@@ -1,8 +1,4 @@
 import { motion } from "motion/react";
-<<<<<<< HEAD
-
-export default function BackgroundVibe() {
-=======
 import { useMemo, useState, useEffect } from "react";
 
 export default function BackgroundVibe() {
@@ -26,66 +22,37 @@ export default function BackgroundVibe() {
     }));
   }, [isMobile]);
 
->>>>>>> 17e96eb (first commit)
   return (
     <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-      {/* Dynamic Gradients */}
+      {/* Static Grain Texture Effect for that premium "paper/film" look */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/natural-paper.png')]" />
+
+      {/* Primary Ambient Glow */}
       <motion.div 
         animate={{
-<<<<<<< HEAD
-          scale: [1, 1.2, 1],
-          opacity: [0.1, 0.15, 0.1],
-        }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-luxury-gold blur-[120px]"
-      />
-      <motion.div 
-        animate={{
-          scale: [1.2, 1, 1.2],
+          scale: isMobile ? 1 : [1, 1.2, 1],
           opacity: [0.05, 0.1, 0.05],
+          x: isMobile ? 0 : [0, 50, 0],
+          y: isMobile ? 0 : [-20, 20, -20]
         }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-luxury-purple blur-[150px]"
+        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -top-[10%] -left-[5%] w-[70%] h-[70%] rounded-full bg-gold/15 blur-[120px]"
       />
 
-      {/* Floating Particles */}
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          initial={{ 
-            x: Math.random() * 100 + "%", 
-            y: Math.random() * 100 + "%", 
-            opacity: Math.random() * 0.3
-          }}
-          animate={{
-            y: [null, (Math.random() - 0.5) * 100 + "px"],
-            opacity: [0.1, 0.4, 0.1],
-          }}
-          transition={{
-            duration: 3 + Math.random() * 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute w-1 h-1 bg-luxury-gold rounded-full"
-=======
-          scale: isMobile ? 1 : [1, 1.1, 1],
-          opacity: [0.08, 0.12, 0.08],
-        }}
-        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-        className="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-accent-gold-soft blur-[120px]"
-      />
       {!isMobile && (
         <motion.div 
           animate={{
-            scale: [1.1, 1, 1.1],
-            opacity: [0.03, 0.08, 0.03],
+            scale: [1.2, 1, 1.2],
+            opacity: [0.02, 0.05, 0.02],
+            x: [0, -40, 0],
+            y: [50, 0, 50]
           }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-accent-gold-soft/40 blur-[150px]"
+          transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute -bottom-[15%] -right-[5%] w-[60%] h-[60%] rounded-full bg-gold/10 blur-[150px]"
         />
       )}
 
-      {/* Floating Particles */}
+      {/* Floating Sparkles (very few, very subtle) */}
       {particlePositions.map((pos, i) => (
         <motion.div
           key={i}
@@ -96,25 +63,20 @@ export default function BackgroundVibe() {
           }}
           animate={{
             y: [null, pos.yMove],
-            opacity: [pos.opacity, pos.opacity + 0.1, pos.opacity],
+            opacity: [pos.opacity, pos.opacity + 0.15, pos.opacity],
           }}
           transition={{
             duration: pos.duration,
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute w-[1px] h-[1px] bg-accent-gold/40 rounded-full"
->>>>>>> 17e96eb (first commit)
+          className="absolute w-[1.5px] h-[1.5px] bg-gold/30 rounded-full"
         />
       ))}
 
-      {/* Grid Pattern with Fade */}
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-[0.03]" />
-<<<<<<< HEAD
-      <div className="absolute inset-0 bg-gradient-to-b from-luxury-black via-transparent to-luxury-black" />
-=======
-      <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-transparent to-bg-primary" />
->>>>>>> 17e96eb (first commit)
+      {/* Edge Vignette */}
+      <div className="absolute inset-0 bg-gradient-to-b from-bg-primary via-transparent to-bg-primary/80" />
+      <div className="absolute inset-0 bg-gradient-to-r from-bg-primary/20 via-transparent to-bg-primary/20" />
     </div>
   );
 }

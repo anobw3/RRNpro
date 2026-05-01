@@ -1,60 +1,33 @@
 import { NFTMetadata } from "../../types";
 import NFTCard from "./NFTCard";
-<<<<<<< HEAD
-import * as ReactWindow from "react-window";
-=======
->>>>>>> 17e96eb (first commit)
-import { useState, useEffect, useCallback, useMemo, memo } from "react";
+import { useState, useEffect, useCallback, useMemo, memo, useRef } from "react";
 import { LayoutGrid, List as ListIcon, Grid3X3 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
-<<<<<<< HEAD
-const List = (ReactWindow as any).List || (ReactWindow as any).default?.List;
-
 interface NFTGridProps {
   nfts: NFTMetadata[];
+  totalCount?: number;
   onSelect: (nft: NFTMetadata) => void;
-}
-
-type ViewMode = "grid" | "list" | "compact";
-
-// Memoized Row Component for react-window v2
-const RowComponent = memo(({ index, style, nfts, columnCount, itemWidth, gap, onSelect, view }: any) => {
-  const items = [];
-  const startIndex = index * columnCount;
-
-  for (let i = 0; i < columnCount; i++) {
-    const nftIndex = startIndex + i;
-    if (nftIndex < nfts.length) {
-      items.push(
-        <div 
-          key={nfts[nftIndex].id} 
-          style={{ width: itemWidth, marginRight: i < columnCount - 1 ? gap : 0 }}
-        >
-          <NFTCard nft={nfts[nftIndex]} onClick={onSelect} view={view} />
-        </div>
-      );
-    }
-  }
-
-  return (
-    <div style={{ ...style, display: "flex", paddingBottom: gap }}>
-      {items}
-=======
-interface NFTGridProps {
-  nfts: NFTMetadata[];
-  onSelect: (nft: NFTMetadata) => void;
+  onLoadMore?: () => void;
   loading?: boolean;
+  view?: ViewMode;
 }
 
 const NFTSkeleton = memo(({ view }: { view: ViewMode }) => {
   if (view === "list") {
     return (
-      <div className="w-full h-[120px] bg-bg-card border border-border-soft rounded-2xl p-4 flex gap-6 animate-pulse">
-        <div className="w-24 h-24 bg-border-soft rounded-xl shrink-0" />
-        <div className="flex flex-col justify-center gap-3 flex-1">
-          <div className="h-4 bg-border-soft rounded w-1/3" />
-          <div className="h-3 bg-border-soft rounded w-2/3 opacity-60" />
+      <div className="w-full h-24 bg-bg-card border border-border-soft rounded-2xl p-3 sm:px-4 grid grid-cols-[72px_1fr_auto] items-center gap-4 sm:gap-6 animate-pulse box-border">
+        <div className="w-[72px] h-[72px] bg-border-soft rounded-xl shrink-0" />
+        <div className="flex flex-col justify-center gap-2 flex-1 min-w-0">
+          <div className="h-3 bg-border-soft rounded w-1/4" />
+          <div className="h-4 bg-border-soft rounded w-1/2" />
+        </div>
+        <div className="flex items-center gap-4 sm:gap-8 shrink-0">
+          <div className="flex flex-col items-end gap-1 min-w-[70px] sm:min-w-[90px]">
+             <div className="h-2 bg-border-soft rounded w-10" />
+             <div className="h-4 bg-border-soft rounded w-16" />
+          </div>
+          <div className="w-10 h-10 rounded-full bg-border-soft shrink-0 hidden sm:block" />
         </div>
       </div>
     );
@@ -62,36 +35,67 @@ const NFTSkeleton = memo(({ view }: { view: ViewMode }) => {
 
   if (view === "compact") {
     return (
-      <div className="aspect-square bg-bg-card border border-border-soft rounded-xl animate-pulse" />
+      <div className="relative aspect-square w-full bg-bg-card border border-border-soft rounded-[24px] animate-pulse flex flex-col h-full overflow-hidden">
+        <div className="aspect-square bg-border-soft w-full" />
+        <div className="p-5 flex flex-col gap-4 flex-1">
+          <div className="flex flex-col gap-2">
+            <div className="h-2 bg-border-soft rounded w-1/4" />
+            <div className="h-4 bg-border-soft rounded w-3/4" />
+          </div>
+          <div className="mt-auto flex items-center justify-between pt-4 border-t border-border-soft/30">
+            <div className="h-4 bg-border-soft rounded w-1/3" />
+            <div className="w-8 h-8 rounded-full bg-border-soft" />
+          </div>
+        </div>
+      </div>
     );
   }
 
   return (
-    <div className="w-full bg-bg-card border border-border-soft rounded-2xl overflow-hidden animate-pulse">
-      <div className="aspect-square bg-border-soft" />
-      <div className="p-5 flex flex-col gap-3">
-        <div className="h-3 bg-border-soft rounded w-1/4" />
-        <div className="h-5 bg-border-soft rounded w-3/4" />
+    <div className="w-full bg-bg-card border border-border-soft rounded-[32px] overflow-hidden animate-pulse flex flex-col h-full shadow-sm">
+      <div className="aspect-square bg-border-soft w-full" />
+      <div className="p-7 flex flex-col gap-6 flex-1">
+        <div className="flex flex-col gap-2">
+          <div className="h-3 bg-border-soft rounded w-1/4" />
+          <div className="h-6 bg-border-soft rounded w-3/4" />
+        </div>
+        <div className="mt-auto flex items-center justify-between pt-4 border-t border-border-soft/30">
+          <div className="flex flex-col gap-1">
+            <div className="h-2 bg-border-soft rounded w-10" />
+            <div className="h-5 bg-border-soft rounded w-20" />
+          </div>
+          <div className="w-11 h-11 rounded-full bg-border-soft" />
+        </div>
       </div>
->>>>>>> 17e96eb (first commit)
     </div>
   );
 });
 
-<<<<<<< HEAD
-RowComponent.displayName = "RowComponent";
-
-export default function NFTGrid({ nfts, onSelect }: NFTGridProps) {
-=======
 NFTSkeleton.displayName = "NFTSkeleton";
 
 type ViewMode = "grid" | "list" | "compact";
 
-export default function NFTGrid({ nfts, onSelect, loading }: NFTGridProps) {
->>>>>>> 17e96eb (first commit)
-  const [view, setView] = useState<ViewMode>("grid");
+export default function NFTGrid({ nfts, totalCount, onSelect, onLoadMore, loading, view = "grid" }: NFTGridProps) {
   const [columnCount, setColumnCount] = useState(5);
   const [containerWidth, setContainerWidth] = useState(1200);
+  const sentinelRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && onLoadMore && !loading && nfts.length < (totalCount || 0)) {
+          onLoadMore();
+        }
+      },
+      { threshold: 0.1, rootMargin: "400px" }
+    );
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [onLoadMore, loading, nfts.length, totalCount]);
 
   useEffect(() => {
     const updateSize = () => {
@@ -119,133 +123,27 @@ export default function NFTGrid({ nfts, onSelect, loading }: NFTGridProps) {
     return () => window.removeEventListener("resize", updateSize);
   }, [view]);
 
-  const gap = view === "compact" ? 8 : 16;
-  const itemWidth = useMemo(() => (containerWidth - (columnCount - 1) * gap) / columnCount, [containerWidth, columnCount, gap]);
-  
-  const itemHeight = useMemo(() => {
-    if (view === "list") return 120; 
-    if (view === "compact") return itemWidth; 
-    return itemWidth + 100; 
-  }, [view, itemWidth]);
+  const gap = view === "compact" ? 12 : 24;
 
-<<<<<<< HEAD
-  const rowCount = Math.ceil(nfts.length / columnCount);
-=======
-  const rowCount = Math.ceil((loading && nfts.length === 0 ? columnCount * 3 : nfts.length) / columnCount);
->>>>>>> 17e96eb (first commit)
-
-  const rowData = useMemo(() => ({
-    nfts,
-    columnCount,
-    itemWidth,
-    gap,
-    onSelect,
-<<<<<<< HEAD
-    view
-  }), [nfts, columnCount, itemWidth, gap, onSelect, view]);
-=======
-    view,
-    loading: loading && nfts.length === 0
-  }), [nfts, columnCount, itemWidth, gap, onSelect, view, loading]);
->>>>>>> 17e96eb (first commit)
-
-  const viewModes: { id: ViewMode; icon: any; label: string }[] = [
-    { id: "grid", icon: LayoutGrid, label: "Grid" },
-    { id: "list", icon: ListIcon, label: "List" },
-    { id: "compact", icon: Grid3X3, label: "Compact" },
-  ];
+  const displayCount = totalCount !== undefined ? totalCount : nfts.length;
 
   return (
     <div className="w-full">
-<<<<<<< HEAD
-      <div className="flex justify-between items-center mb-8 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-2 max-w-fit">
-        {viewModes.map((mode) => (
-          <button
-            key={mode.id}
-            onClick={() => setView(mode.id)}
-            className={`
-              relative flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider transition-all
-              ${view === mode.id ? "text-black" : "text-white/40 hover:text-white/60"}
-            `}
-          >
-            {view === mode.id && (
-              <motion.div
-                layoutId="activeView"
-                className="absolute inset-0 bg-luxury-gold rounded-xl shadow-[0_0_15px_rgba(212,175,55,0.4)]"
-                transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-              />
-            )}
-            <mode.icon className={`w-4 h-4 relative z-10 transition-colors`} />
-            <span className="relative z-10 hidden sm:inline">{mode.label}</span>
-          </button>
-        ))}
-=======
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-        <div className="flex bg-bg-card backdrop-blur-md border border-border-soft rounded-2xl p-1.5 w-full sm:w-auto overflow-hidden text-text-primary">
-          {viewModes.map((mode) => (
-            <button
-              key={mode.id}
-              onClick={() => setView(mode.id)}
-              className={`
-                relative flex-1 sm:flex-none flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all
-                ${view === mode.id ? "text-black" : "text-text-muted hover:text-text-secondary"}
-              `}
-            >
-              {view === mode.id && (
-                <motion.div
-                  layoutId="activeView"
-                  className="absolute inset-0 bg-accent-gold rounded-xl shadow-[0_0_15px_var(--accent-gold-soft)]"
-                  transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                />
-              )}
-              <mode.icon className={`w-3.5 h-3.5 relative z-10 transition-colors`} />
-              <span className="relative z-10">{mode.label}</span>
-            </button>
-          ))}
+      <div className="flex flex-col sm:flex-row justify-between items-center mb-10 gap-4">
+        <div className="flex items-center gap-4">
+           <div className={`w-2.5 h-2.5 rounded-full ${loading ? "bg-gold animate-pulse shadow-[0_0_10px_var(--accent-gold)]" : "bg-status-success shadow-[0_0_10px_rgba(16,185,129,0.5)]"}`} />
+           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted">
+              {loading && nfts.length === 0 ? "Summoning spirits..." : `${displayCount} Assets Identified`}
+           </span>
         </div>
         
-        <div className="hidden sm:flex items-center gap-3 text-[10px] uppercase font-bold tracking-widest text-text-muted">
-          <span className={`w-2 h-2 rounded-full ${loading ? "bg-accent-gold animate-pulse" : "bg-status-success"}`} />
-          {loading && nfts.length === 0 ? "Summoning Spirits..." : `${nfts.length} Assets Found`}
+        <div className="hidden sm:flex items-center gap-2">
+           <span className="text-[9px] text-text-muted uppercase tracking-widest font-black">Scroll for more heritage</span>
         </div>
->>>>>>> 17e96eb (first commit)
       </div>
 
       <AnimatePresence mode="wait">
         <motion.div
-<<<<<<< HEAD
-          key={view}
-          initial={{ opacity: 0, scale: 0.98 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 1.02 }}
-          transition={{ duration: 0.2 }}
-          className="w-full"
-        >
-          <div className="md:hidden grid gap-3" 
-            style={{ 
-              gridTemplateColumns: view === "compact" 
-                ? `repeat(3, minmax(0, 1fr))` 
-                : view === "list" 
-                  ? "1fr" 
-                  : "repeat(2, minmax(0, 1fr))" 
-            }}
-          >
-            {nfts.map((nft) => (
-              <NFTCard key={nft.id.toString()} nft={nft} onClick={onSelect} view={view} />
-            ))}
-          </div>
-          
-          <div className="hidden md:block">
-            <List
-              height={800}
-              rowCount={rowCount}
-              rowHeight={itemHeight + gap}
-              width={containerWidth}
-              rowComponent={RowComponent}
-              rowProps={rowData}
-              className="scrollbar-hide"
-            />
-=======
           key={view + (loading && nfts.length === 0 ? '-loading' : '')}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -290,7 +188,16 @@ export default function NFTGrid({ nfts, onSelect, loading }: NFTGridProps) {
                 ))
               )}
             </div>
->>>>>>> 17e96eb (first commit)
+          </div>
+
+          {/* Lazy Loading Sentinel */}
+          <div ref={sentinelRef} className="h-20 w-full flex items-center justify-center">
+            {loading && nfts.length > 0 && (
+              <div className="flex items-center gap-3">
+                <div className="w-5 h-5 rounded-full border-2 border-gold/20 border-t-gold animate-spin" />
+                <span className="text-[10px] font-bold text-gold uppercase tracking-widest">Identifying more spirits...</span>
+              </div>
+            )}
           </div>
         </motion.div>
       </AnimatePresence>
@@ -299,7 +206,4 @@ export default function NFTGrid({ nfts, onSelect, loading }: NFTGridProps) {
 }
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 17e96eb (first commit)

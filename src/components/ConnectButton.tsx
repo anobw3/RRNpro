@@ -32,14 +32,14 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({ className = '', variant =
   const isLoading = isConnecting || isMinting;
 
   const getVariantStyles = () => {
-    if (isLoading) return 'bg-bg-secondary border border-border-soft text-text-muted cursor-not-allowed opacity-50';
+    if (isLoading) return 'bg-bg-primary/50 text-text-muted cursor-not-allowed opacity-50';
     switch (variant) {
       case 'outline':
-        return 'border border-accent-gold/50 text-accent-gold hover:bg-accent-gold/10';
+        return 'border border-gold text-gold hover:bg-gold/10';
       case 'minimal':
-        return 'text-text-secondary hover:text-text-primary';
+        return 'text-text-secondary hover:text-text-primary underline underline-offset-4 decoration-gold/30';
       default:
-        return 'connect-wallet';
+        return 'btn-primary px-8 py-4 !rounded-2xl';
     }
   };
 
@@ -48,55 +48,55 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({ className = '', variant =
       <div className="flex items-center gap-2">
         {!isConnected ? (
           <motion.button
-            whileHover={!isLoading ? { scale: 1.02 } : {}}
+            whileHover={!isLoading ? { y: -2 } : {}}
             whileTap={!isLoading ? { scale: 0.98 } : {}}
             onClick={connect}
             disabled={isLoading}
-            className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold uppercase tracking-widest text-xs transition-all ${getVariantStyles()}`}
+            className={`flex items-center justify-center gap-3 font-bold uppercase tracking-[0.2em] text-[10px] transition-all ${getVariantStyles()}`}
           >
             {isLoading ? (
-              <RefreshCcw className="w-4 h-4 animate-spin" />
+              <RefreshCcw className="w-3.5 h-3.5 animate-spin" />
             ) : (
-              <Wallet className="w-4 h-4" />
+              <Wallet className="w-3.5 h-3.5" />
             )}
-            <span>{isConnecting ? 'Connecting...' : 'Connect Wallet'}</span>
+            <span>{isConnecting ? 'Authenticating...' : 'Commence Link'}</span>
           </motion.button>
         ) : (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             {/* Minting State indicator */}
             {isMinting && (
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-accent-gold/30 text-accent-gold bg-accent-gold/5 text-[10px] font-bold uppercase tracking-widest animate-pulse">
+              <div className="flex items-center gap-3 px-4 py-2 rounded-xl border border-gold/30 text-gold bg-bg-card text-[9px] font-black uppercase tracking-[0.25em] animate-pulse">
                 <RefreshCcw className="w-3 h-3 animate-spin" />
-                Minting...
+                Archiving...
               </div>
             )}
             
             {/* Network Indicator */}
             {networkName && (
               <div 
-                className={`hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-bold uppercase tracking-tighter ${
+                className={`hidden md:flex items-center gap-2.5 px-4 py-2.5 rounded-xl border text-[9px] font-black uppercase tracking-[0.2em] ${
                   isWrongNetwork 
-                  ? 'border-red-500/50 text-red-500 bg-red-500/10' 
-                  : 'border-border-soft text-text-secondary bg-bg-card'
-                } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
+                  ? 'border-status-error/50 text-status-error bg-status-error/5' 
+                  : 'border-border-soft text-text-muted bg-bg-primary/50'
+                } ${isLoading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer hover:border-gold/30 transition-all font-sans'}`}
                 onClick={() => !isLoading && isWrongNetwork && switchNetwork('0x1')}
-                title={isWrongNetwork ? 'Click to switch to Ethereum' : networkName}
+                title={isWrongNetwork ? 'Switch to Ethereum Mainnet' : `Relayed via ${networkName}`}
               >
-                <div className={`w-1.5 h-1.5 rounded-full ${isWrongNetwork ? 'bg-red-500 animate-pulse' : 'bg-green-500'}`} />
+                <div className={`w-1.5 h-1.5 rounded-full ${isWrongNetwork ? 'bg-status-error animate-pulse shadow-[0_0_8px_var(--status-error)]' : 'bg-status-success shadow-[0_0_8px_var(--status-success)]'}`} />
                 {networkName}
-                {isWrongNetwork && <RefreshCcw className={`w-2.5 h-2.5 ml-1 ${isLoading ? '' : ''}`} />}
+                {isWrongNetwork && <RefreshCcw className="w-2.5 h-2.5 ml-1" />}
               </div>
             )}
 
             {/* Address Display */}
-            <div className="flex items-center bg-bg-card border border-border-soft rounded-full pl-4 pr-1 py-1 gap-3">
-              <span className="text-[11px] font-mono font-bold text-text-primary">
+            <div className="flex items-center bg-bg-card border border-border-soft rounded-2xl pl-5 pr-1.5 py-1.5 gap-4 shadow-sm">
+              <span className="text-[10px] font-bold tracking-[0.1em] text-text-primary uppercase">
                 {shortenedAddress}
               </span>
               <button
                 onClick={disconnect}
-                className="p-2 rounded-full bg-bg-card hover:bg-red-500/20 hover:text-red-500 text-text-muted transition-all"
-                title="Disconnect Wallet"
+                className="w-8 h-8 rounded-xl bg-bg-primary text-text-muted hover:bg-status-error hover:text-white transition-all flex items-center justify-center"
+                title="Disconnect from Archive"
               >
                 <LogOut className="w-3.5 h-3.5" />
               </button>
@@ -109,15 +109,16 @@ const ConnectButton: React.FC<ConnectButtonProps> = ({ className = '', variant =
       <AnimatePresence>
         {error && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="absolute top-full mt-3 p-3 bg-red-500/10 border border-red-500/20 rounded-xl flex items-start gap-3 min-w-[200px]"
+            initial={{ opacity: 0, y: -10, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="absolute top-full mt-4 p-4 bg-bg-card border border-status-error/30 rounded-2xl flex items-start gap-4 min-w-[280px] shadow-2xl z-50 overflow-hidden"
           >
-            <AlertCircle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
-            <div className="flex flex-col gap-1">
-              <p className="text-[10px] text-red-500 font-bold uppercase">Connection Issue</p>
-              <p className="text-[9px] text-text-muted leading-relaxed">{error}</p>
+            <div className="absolute inset-0 bg-status-error/5 pointer-events-none" />
+            <AlertCircle className="w-4 h-4 text-status-error mt-0.5 flex-shrink-0 relative z-10" />
+            <div className="flex flex-col gap-1.5 relative z-10">
+              <p className="text-[10px] text-status-error font-black uppercase tracking-widest">Protocol Rejection</p>
+              <p className="text-[9px] text-text-muted leading-relaxed uppercase tracking-wider">{error}</p>
             </div>
           </motion.div>
         )}

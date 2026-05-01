@@ -1,49 +1,10 @@
-<<<<<<< HEAD
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-
-interface WalletContextType {
-  isConnected: boolean;
-  address: string | null;
-  connect: () => Promise<void>;
-  disconnect: () => void;
-  ownedNfts: string[]; // IDs of owned NFTs
-}
-
-const WalletContext = createContext<WalletContextType | undefined>(undefined);
-
-export const WalletProvider = ({ children }: { children: ReactNode }) => {
-  const [isConnected, setIsConnected] = useState(false);
-  const [address, setAddress] = useState<string | null>(null);
-  const [ownedNfts, setOwnedNfts] = useState<string[]>([]);
-
-  const connect = async () => {
-    // Mocking ethers.js provider request
-    console.log("Requesting account access...");
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    const mockAddress = "0x8f2c...3d4f";
-    setAddress(mockAddress);
-    setIsConnected(true);
-    setOwnedNfts(["2", "5"]); // Mocking some owned NFTs (Royal Raccoon Batak and Royal Raccoon Riau Islands)
-    console.log("Connected to", mockAddress);
-  };
-
-  const disconnect = () => {
-    setIsConnected(false);
-    setAddress(null);
-    setOwnedNfts([]);
-  };
-
-  return (
-    <WalletContext.Provider value={{ isConnected, address, connect, disconnect, ownedNfts }}>
-=======
 import React, { createContext, useContext, useState, ReactNode, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
 import { EthereumProvider } from '@walletconnect/ethereum-provider';
 import { NFT_CONTRACT_ABI } from '../contracts/abi';
 
 // WalletConnect Project ID - Should be in .env
-const WALLETCONNECT_PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || "6b333d3223ba129e510d2f65e0f8c665";
+const WALLETCONNECT_PROJECT_ID = import.meta.env.VITE_WALLETCONNECT_PROJECT_ID || "";
 
 interface WalletContextType {
   isConnected: boolean;
@@ -189,6 +150,24 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
         const injectedProvider = (window as any).ethereum;
         
         try {
+          // Pre-flight check for iFrame/Metamask issues
+          if (window.self !== window.top) {
+            console.warn("[Wallet] Running in iFrame, connection might be unstable. Consider opening in a new tab if it fails.");
+          }
+
+          // Poke permissions - sometimes helps MetaMask in iFrames
+          try {
+            await Promise.race([
+              injectedProvider.request({ 
+                method: 'wallet_requestPermissions', 
+                params: [{ eth_accounts: {} }] 
+              }),
+              new Promise((_, reject) => setTimeout(() => reject(new Error("Timeout")), 1000))
+            ]);
+          } catch (pErr) {
+            console.log("[Wallet] Permission poke skipped or timed out:", pErr);
+          }
+
           const accounts = await injectedProvider.request({ method: 'eth_requestAccounts' });
           const chainId = await injectedProvider.request({ method: 'eth_chainId' });
           
@@ -220,7 +199,11 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
 
       // 3. Fallback to WalletConnect for Mobile/Other browsers
       if (!WALLETCONNECT_PROJECT_ID) {
-        setError("MetaMask not found & WalletConnect Project ID missing");
+        let errorMsg = "MetaMask not found & WalletConnect Project ID missing.";
+        if (window.self !== window.top) {
+          errorMsg += " Try opening in a new tab (External Button) for better wallet compatibility.";
+        }
+        setError(errorMsg);
         return;
       }
 
@@ -235,7 +218,7 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
           }
         },
         chains: [1], // Ethereum Mainnet
-        optionalChains: [137, 56], // Polygon, BSC
+        optionalChains: [137, 56, 8453], // Polygon, BSC, Base
         methods: ["eth_sendTransaction", "personal_sign", "eth_requestAccounts"],
         events: ["chainChanged", "accountsChanged"],
       });
@@ -265,13 +248,16 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
       
       let message = error.message || "Failed to connect wallet";
       
-      if (message.includes("Connection request reset")) {
-        message = "Connection request reset. Please try again. This can happen if you close the wallet popup too quickly or if the browser blocks the connection.";
+      if (message.includes("Connection request reset") || message.includes("closed before receiving")) {
+        message = "Wallet connection was reset. \n\nFIX: Please open the app in a NEW TAB using the 'Open in New Tab' button in the header for stable wallet communication.";
       } else if (error.code === 4001) {
         message = "User rejected connection request";
+      } else if (message.includes("User closed modal")) {
+        message = "Connection cancelled by user.";
       }
       
       setError(message);
+      handleDisconnect(); // Critical: Reset state so UI isn't stuck "connecting" or "connected with error"
     } finally {
       setIsConnecting(false);
     }
@@ -491,7 +477,6 @@ export const WalletProvider = ({ children }: { children: ReactNode }) => {
       explorerUrl: getExplorerUrl(chainId),
       providerType
     }}>
->>>>>>> 17e96eb (first commit)
       {children}
     </WalletContext.Provider>
   );

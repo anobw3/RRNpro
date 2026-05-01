@@ -25,39 +25,25 @@ export default function LanguageSwitcher() {
     <div className="relative" ref={containerRef}>
       <button 
         onClick={() => setIsOpen(!isOpen)}
-<<<<<<< HEAD
-        className="flex items-center gap-2 px-4 py-2 glass border border-white/5 rounded-full text-white/50 hover:text-white hover:border-white/20 transition-all group"
+        className="flex items-center gap-3 px-5 py-2.5 bg-bg-primary/50 backdrop-blur-xl border border-border-soft rounded-full text-text-muted hover:text-text-primary hover:border-gold/30 transition-all group"
       >
-        <Globe className="w-3.5 h-3.5 group-hover:text-luxury-gold transition-colors" />
-=======
-        className="flex items-center gap-2 px-4 py-2 bg-bg-card backdrop-blur-xl border border-border-soft rounded-full text-text-muted hover:text-text-primary hover:border-text-secondary transition-all group"
-      >
-        <Globe className="w-3.5 h-3.5 group-hover:text-accent-gold transition-colors" />
->>>>>>> 17e96eb (first commit)
-        <span className="text-[10px] font-bold tracking-widest uppercase">{currentLang.code}</span>
-        <ChevronDown className={`w-3 h-3 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
+        <Globe className="w-3.5 h-3.5 group-hover:text-gold transition-colors" />
+        <span className="text-[10px] font-bold tracking-[0.2em] uppercase">{currentLang.code}</span>
+        <ChevronDown className={`w-3 h-3 transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       
       <AnimatePresence>
         {isOpen && (
           <motion.div 
-            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+            initial={{ opacity: 0, y: 15, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 10, scale: 0.95 }}
-            transition={{ type: "spring", damping: 20, stiffness: 300 }}
-<<<<<<< HEAD
-            className="absolute top-full inset-inline-end-0 mt-4 w-56 glass border border-white/10 rounded-[1.5rem] overflow-hidden shadow-2xl z-[150] py-2"
+            exit={{ opacity: 0, y: 15, scale: 0.98 }}
+            className="absolute top-full right-0 lg:left-0 mt-4 w-60 bg-bg-card border border-border-soft rounded-[28px] overflow-hidden shadow-2xl z-150 p-2"
           >
-            <div className="px-4 py-2 mb-1 border-b border-white/5">
-              <span className="text-[8px] font-bold tracking-[0.3em] uppercase text-white/20">{t("nav.select_language") || "Select Language"}</span>
-=======
-            className="absolute top-full inset-inline-end-0 mt-4 w-56 bg-bg-secondary backdrop-blur-xl border border-border-soft rounded-[1.5rem] overflow-hidden shadow-2xl z-[150] py-2"
-          >
-            <div className="px-4 py-2 mb-1 border-b border-border-soft">
-              <span className="text-[8px] font-bold tracking-[0.3em] uppercase text-text-muted">{t("nav.select_language") || "Select Language"}</span>
->>>>>>> 17e96eb (first commit)
+            <div className="px-5 py-3 mb-2 border-b border-border-soft/50">
+              <span className="text-[9px] font-black tracking-[0.4em] uppercase text-text-muted block">{t("nav.select_language") || "Vernacular"}</span>
             </div>
-            <div className="max-h-[320px] overflow-y-auto scrollbar-hide">
+            <div className="space-y-1">
               {LANGUAGES.map((lang) => (
                 <button
                   key={lang.code}
@@ -65,24 +51,15 @@ export default function LanguageSwitcher() {
                     setLanguage(lang.code as Language);
                     setIsOpen(false);
                   }}
-<<<<<<< HEAD
-                  className={`w-full flex items-center justify-between px-4 py-3 text-start transition-all hover:bg-white/5 group ${
-                    language === lang.code ? 'text-luxury-gold bg-white/[0.02]' : 'text-white/60'
-=======
-                  className={`w-full flex items-center justify-between px-4 py-3 text-start transition-all hover:bg-bg-card group ${
-                    language === lang.code ? 'text-accent-gold bg-accent-gold-soft/10' : 'text-text-secondary'
->>>>>>> 17e96eb (first commit)
+                  className={`w-full flex items-center justify-between px-5 py-3.5 text-start transition-all rounded-xl ${
+                    language === lang.code ? 'bg-gold text-black' : 'text-text-secondary hover:text-text-primary hover:bg-bg-primary'
                   }`}
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="text-lg leading-none">{lang.flag}</span>
-                    <span className="font-bold tracking-widest text-[10px] uppercase">{lang.name}</span>
+                  <div className="flex items-center gap-4">
+                    <span className="text-xl leading-none">{lang.flag}</span>
+                    <span className="font-bold tracking-[0.1em] text-[10px] uppercase">{lang.name}</span>
                   </div>
-<<<<<<< HEAD
-                  {language === lang.code && <Check className="w-3 h-3 text-luxury-gold" />}
-=======
-                  {language === lang.code && <Check className="w-3 h-3 text-accent-gold" />}
->>>>>>> 17e96eb (first commit)
+                  {language === lang.code && <Check className="w-4 h-4 text-black" />}
                 </button>
               ))}
             </div>

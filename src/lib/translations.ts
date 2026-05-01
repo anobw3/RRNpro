@@ -25,8 +25,6 @@ export const translations = {
       all: "All",
       select_language: "Select Language",
       coming_soon: "Coming Soon",
-<<<<<<< HEAD
-=======
       mint: "Mint Raccoon",
       minting: "Minting...",
       success: "Mint Successful!",
@@ -35,7 +33,6 @@ export const translations = {
       minted: "minted",
       only_left: "Only {count} Left",
       price_eth: "Price: {price} ETH",
->>>>>>> 17e96eb (first commit)
     },
     hero: {
       badge: "Digital Heritage Elite",
@@ -51,12 +48,6 @@ export const translations = {
     },
     lore: {
       badge: "The Chronology",
-<<<<<<< HEAD
-      title: "NUSANTARA ETERNA",
-      p1: "In the twilight of the Great Celestial Cycle, a new realm emerged between the currents of time. Nusantara Eterna—a sanctuary where the restless spirits of ancient beasts were reborn through the alchemy of futuristic technology.",
-      quote: "These are not merely creatures; they are the Royal Raccoons, sovereign protectors of the archipelago's digital soul.",
-      p2: "To hold a Raccoon is to command a fragment of the eternal kingdom. Where culture becomes power, and tradition fuels the engine of the future.",
-=======
       title: "ROYAL RACCOON SAGA",
       genesis_title: "GENESIS OF ETERNITY",
       genesis_p1: "In the twilight of the Great Celestial Cycle, a new realm emerged between the currents of time. Nusantara Eterna—a sanctuary where the restless spirits of ancient beasts were reborn through the alchemy of futuristic technology.",
@@ -72,7 +63,6 @@ export const translations = {
       bond_p4: "Here, culture is not just preserved—it is brought back to life.",
       bond_p5: "And tradition... becomes the engine that powers eternity.",
       cta: "ENTER THE REALM",
->>>>>>> 17e96eb (first commit)
       btn_archive: "Explore the Archive",
     },
     collection: {
@@ -83,8 +73,6 @@ export const translations = {
       filter_islands: "Islands",
       filter_regions: "All Regions",
       filter_categories: "Categories",
-<<<<<<< HEAD
-=======
       filter_rarities: "Rarity Tier",
       search_placeholder_detailed: "Search tribe, outfit, or island...",
       sort_by: "Sort By",
@@ -92,7 +80,6 @@ export const translations = {
       sort_price_low: "Price: Low to High",
       sort_price_high: "Price: High to Low",
       sort_rarity: "Rarity Rank",
->>>>>>> 17e96eb (first commit)
       inspect: "Inspect Record",
       owned: "Owned",
       no_records: "No records found",
@@ -109,20 +96,14 @@ export const translations = {
       element: "Element",
       region: "Region",
       armor: "Armor",
-<<<<<<< HEAD
-=======
       price: "Price",
       rank: "Rank",
       last_sale: "Last Sale",
->>>>>>> 17e96eb (first commit)
       primary_protocol: "Primary Protocol",
       hierarchy: "Hierarchy Directive",
       engage: "Engage Sovereign",
       exit: "Exit",
-<<<<<<< HEAD
-=======
       heritage_origin: "Heritage Origin",
->>>>>>> 17e96eb (first commit)
     },
     marketplace: {
       badge: "Trading Protocol V.1",
@@ -139,11 +120,6 @@ export const translations = {
       buy: "Acquire Asset",
       explore: "Explore Full Marketplace",
       view_opensea: "View on OpenSea",
-<<<<<<< HEAD
-    },
-    footer: {
-      subtitle: "Eterna Genesis",
-=======
       items: "Items",
       volume: "Vol",
       tab_items: "Items",
@@ -163,7 +139,6 @@ export const translations = {
     },
     footer: {
       subtitle: "Royal Raccoon Genesis",
->>>>>>> 17e96eb (first commit)
       description: "Forging the future of cultural heritage through high-integrity digital assets. A sovereign odyssey across the archipelago.",
       protocols: "Protocols",
       archives: "Archives",
@@ -185,8 +160,6 @@ export const translations = {
       epic: "Epic",
       rare: "Rare",
       common: "Common",
-<<<<<<< HEAD
-=======
       uncommon: "Uncommon",
       badge: "Hierarchy of Power",
       title: "THE RARITY SYSTEM",
@@ -196,29 +169,10 @@ export const translations = {
       legendary_desc: "Mythical kings of a forgotten era.",
       mythic_desc: "Transcendent beings beyond time.",
       divine_desc: "The supreme architects of Nusantara.",
->>>>>>> 17e96eb (first commit)
     }
   },
   id: {
     nav: {
-<<<<<<< HEAD
-      collection: "Koleksi",
-      marketplace: "Pasar",
-      lore: "Hikayat",
-      manifesto: "Manifesto",
-      connect: "Hubungkan Dompet",
-      connected: "Terhubung",
-      all: "Semua",
-    },
-    hero: {
-      badge: "Elite Pusaka Digital",
-      title_1: "ROYAL",
-      title_2: "RACCOONS OF",
-      title_3: "NUSANTARA",
-      description: "Roh rakun legendaris terlahir kembali melalui alkimia digital. Sebuah pengembaraan terkurasi dari rakun berdaulat kepulauan Indonesia dengan busana tradisional, ditempa dalam api blockchain.",
-      btn_enter: "Masuk Kerajaan",
-      btn_manifesto: "Lihat Manifesto",
-=======
       collection: "Arsip Pusaka",
       marketplace: "Pasar",
       lore: "Hikayat",
@@ -243,32 +197,11 @@ export const translations = {
       description: "Warisan, Kedaulatan, dan Teknologi dalam Satu Kesatuan Abadi. Koleksi NFT premium yang memadukan budaya Nusantara.",
       btn_enter: "MASUK KE TAKHTA",
       btn_manifesto: "JELAJAHI KOLEKSI",
->>>>>>> 17e96eb (first commit)
       stats_units: "Unit Genesis",
       stats_traits: "Sifat Mitos",
       stats_owners: "Pemilik Global",
     },
     lore: {
-<<<<<<< HEAD
-      badge: "Kronologi",
-      title: "NUSANTARA ETERNA",
-      p1: "Di senja Siklus Surgawi Besar, alam baru muncul di antara arus waktu. Nusantara Eterna—sebuah suaka di mana roh-roh gelisah dari binatang purba terlahir kembali melalui alkimia teknologi futuristik.",
-      quote: "Mereka bukan sekadar makhluk; mereka adalah Royal Raccoons, pelindung berdaulat dari jiwa digital nusantara.",
-      p2: "Memiliki seekor Raccoon berarti menguasai fragmen dari kerajaan abadi. Di mana budaya menjadi kekuatan, dan tradisi menggerakkan mesin masa depan.",
-      btn_archive: "Jelajahi Arsip",
-    },
-    collection: {
-      badge: "Arsip Genesis",
-      title_1: "ROYAL",
-      title_2: "RACCOONS",
-      search_placeholder: "Cari di arsip...",
-      filter_islands: "Pulau",
-      filter_regions: "Semua Suku",
-      filter_categories: "Kategori",
-      inspect: "Periksa Catatan",
-      owned: "Dimiliki",
-      no_records: "Catatan tidak ditemukan",
-=======
       badge: "Kronologi Abadi",
       title: "Asal-Usul Takhta",
       genesis_title: "AWAL MULA KEABADIAN",
@@ -305,7 +238,6 @@ export const translations = {
       inspect: "LIHAT DETAIL",
       owned: "Dimiliki",
       no_records: "Tidak ditemukan koleksi yang sesuai.",
->>>>>>> 17e96eb (first commit)
       adjust_filters: "Sesuaikan filter Anda untuk menemukan garis keturunan tersembunyi.",
     },
     details: {
@@ -319,29 +251,13 @@ export const translations = {
       element: "Elemen",
       region: "Wilayah",
       armor: "Zirah",
-<<<<<<< HEAD
-=======
       price: "Harga",
       rank: "Peringkat",
       last_sale: "Penjualan Terakhir",
->>>>>>> 17e96eb (first commit)
       primary_protocol: "Protokol Utama",
       hierarchy: "Arahan Hirarki",
       engage: "Libatkan Penguasa",
       exit: "Keluar",
-<<<<<<< HEAD
-    },
-    marketplace: {
-      badge: "Protokol Perdagangan V.1",
-      title_1: "Kedaulatan",
-      title_2: "Digital",
-      description: "Terlibat dalam akuisisi arsip entitas digital paling bergengsi di kepulauan ini.",
-      offer: "Harga Saat Ini",
-      floor_price: "Harga Dasar",
-      owners: "Pemilik",
-      your_asset: "Aset Anda",
-      mint_now: "Mint Sekarang",
-=======
       heritage_origin: "Asal Pusaka",
     },
     marketplace: {
@@ -354,17 +270,11 @@ export const translations = {
       owners: "Pemilik",
       your_asset: "Aset Anda",
       mint_now: "CETAK NFT",
->>>>>>> 17e96eb (first commit)
       supply: "Total Pasokan",
       view_stats: "Lihat Statistik Rantai",
       buy: "Akuisisi Aset",
       explore: "Jelajahi Seluruh Pasar",
       view_opensea: "Lihat di OpenSea",
-<<<<<<< HEAD
-    },
-    footer: {
-      subtitle: "Eterna Genesis",
-=======
       items: "Item",
       volume: "Volume",
       tab_items: "Item",
@@ -385,25 +295,11 @@ export const translations = {
     footer: {
       tagline: "Menjaga warisan. Menggerakkan masa depan.",
       subtitle: "Royal Raccoon Genesis",
->>>>>>> 17e96eb (first commit)
       description: "Menempa masa depan warisan budaya melalui aset digital berintegritas tinggi. Sebuah pengembaraan berdaulat di seluruh nusantara.",
       protocols: "Protokol",
       archives: "Arsip",
       integrity: "Integritas",
       privacy: "Protokol Privasi",
-<<<<<<< HEAD
-      digital_laws: "Hukum Digital",
-      governance: "Tata Kelola",
-      lineage_map: "Peta Garis Keturunan",
-      beast_code: "Kode Raccoon",
-      royal_vault: "Kubah Kerajaan",
-      security_audit: "Audit Keamanan",
-      transparency: "Transparansi",
-      rights: "SEMUA HAK BERDAULAT DILINDUNGI",
-    },
-    rarity: {
-      divine: "Ilahi",
-=======
       digital_laws: "Hukum Adat Digital",
       governance: "Tata Kelola Kerajaan",
       lineage_map: "Garis Keturunan",
@@ -414,14 +310,10 @@ export const translations = {
       rights: "Hak cipta dilindungi.",
     },
     rarity: {
->>>>>>> 17e96eb (first commit)
       mythic: "Mitos",
       legendary: "Legendaris",
       epic: "Epik",
       rare: "Langka",
-<<<<<<< HEAD
-      common: "Umum",
-=======
       uncommon: "Tak Lazim",
       common: "Biasa",
       divine: "Ilahi",
@@ -433,7 +325,6 @@ export const translations = {
       legendary_desc: "Raja mitos dari era yang terlupakan.",
       mythic_desc: "Makhluk transenden yang melampaui waktu.",
       divine_desc: "Arsitek agung dari Nusantara Eterna.",
->>>>>>> 17e96eb (first commit)
     }
   },
   es: {

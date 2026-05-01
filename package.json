@@ -15,15 +15,6 @@
     "@tailwindcss/vite": "^4.1.14",
     "@types/react-window": "^1.8.8",
     "@vitejs/plugin-react": "^5.0.4",
-<<<<<<< HEAD
-    "dotenv": "^17.2.3",
-    "express": "^4.21.2",
-    "lenis": "^1.3.23",
-    "lucide-react": "^0.546.0",
-    "motion": "^12.23.24",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-=======
     "@walletconnect/ethereum-provider": "^2.23.9",
     "buffer": "^6.0.3",
     "dotenv": "^17.2.3",
@@ -38,7 +29,6 @@
     "react-dom": "^19.0.0",
     "react-i18next": "^17.0.6",
     "react-router-dom": "^7.14.2",
->>>>>>> 17e96eb (first commit)
     "react-window": "^2.2.7",
     "vite": "^6.2.0"
   },

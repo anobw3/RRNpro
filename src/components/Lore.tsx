@@ -1,76 +1,9 @@
-<<<<<<< HEAD
-import { motion } from "motion/react";
-=======
 import { motion, useScroll, useTransform, Variants } from "motion/react";
 import { useRef } from "react";
->>>>>>> 17e96eb (first commit)
 import { useTranslation } from "../context/LanguageContext";
 
 export default function Lore() {
   const { t } = useTranslation();
-<<<<<<< HEAD
-
-  return (
-    <div className="relative py-20 px-4">
-      {/* Background Parallax Element */}
-      <motion.div 
-        style={{ y: "-20%" }}
-        whileInView={{ y: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute inset-0 z-0 opacity-20 pointer-events-none"
-      >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[600px] bg-luxury-purple/10 blur-[150px] rounded-full"></div>
-      </motion.div>
-
-      <div className="max-w-5xl mx-auto relative z-10 text-center">
-        <motion.div
-           initial={{ opacity: 0, y: 50 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true, margin: "-100px" }}
-           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <span className="text-luxury-gold text-xs font-bold uppercase tracking-[0.8em] mb-6 block text-glow uppercase">{t("lore.badge")}</span>
-          <h2 className="text-[length:var(--font-size-fluid-h2)] font-display mb-12 md:mb-16 tracking-tighter leading-none uppercase">{t("lore.title_1")}<br/>{t("lore.title_2")}</h2>
-          
-          <div className="space-y-8 md:space-y-12 text-white/50 text-base md:text-2xl font-light leading-relaxed max-w-3xl mx-auto text-center font-sans tracking-wide">
-            <p className="balance">
-              {t("lore.p1")}
-            </p>
-            
-            <div className="relative py-8 md:py-12 px-6 md:px-8 overflow-hidden group">
-              <div className="absolute inset-0 bg-white/[0.02] border-y border-luxury-gold/20 scale-x-0 group-hover:scale-x-100 transition-transform duration-1000 origin-center" />
-              <p className="italic text-white/80 font-display text-xl md:text-3xl relative z-10 leading-snug">
-                "{t("lore.quote")}"
-              </p>
-            </div>
-
-            <p className="balance text-base md:text-xl">
-              {t("lore.p2")}
-            </p>
-          </div>
-
-          <motion.div 
-            className="mt-12 md:mt-20 inline-block p-[1px] bg-gradient-to-r from-transparent via-luxury-gold to-transparent rounded-full"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            <div className="px-8 md:px-10 py-3 md:py-4 bg-luxury-black rounded-full text-[9px] md:text-[10px] font-bold tracking-[0.3em] text-luxury-gold uppercase hover:bg-luxury-gold hover:text-black transition-all cursor-pointer">
-              {t("lore.btn_explore")}
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-
-      {/* Decorative background text */}
-      <div className="absolute inset-inline-start-[-10%] top-1/2 -translate-y-1/2 opacity-[0.03] hidden lg:block select-none pointer-events-none">
-        <span className="text-[20rem] font-display font-black ltr:rotate-90 rtl:-rotate-90 inline-block">HISTORY</span>
-      </div>
-      <div className="absolute inset-inline-end-[-10%] top-1/2 -translate-y-1/2 opacity-[0.03] hidden lg:block select-none pointer-events-none">
-        <span className="text-[20rem] font-display font-black ltr:-rotate-90 rtl:rotate-90 inline-block">FUTURE</span>
-      </div>
-    </div>
-=======
   const containerRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -135,58 +68,58 @@ export default function Lore() {
       {/* Cinematic Parallax Background */}
       <motion.div 
         style={{ y: backgroundY, opacity: backgroundOpacity }}
-        className="absolute inset-0 z-0 pointer-events-none"
+        className="absolute inset-x-[-20%] top-[-20%] bottom-[-20%] z-0 pointer-events-none"
       >
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-6xl aspect-video bg-purple-500/5 blur-[120px] rounded-full" />
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,var(--accent-gold-soft),transparent_70%)]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gold/5 blur-[150px] rounded-full" />
       </motion.div>
 
       {/* Cinematic Vignette */}
-      <div className="absolute inset-0 pointer-events-none z-[1] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.1)_100%)] dark:bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.5)_100%)]" />
+      <div className="absolute inset-0 pointer-events-none z-[1] bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]" />
 
       <motion.div 
-        className="max-w-2xl mx-auto relative z-10 text-center"
+        className="max-w-3xl mx-auto relative z-10 text-center"
         variants={staggerContainer}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
         {/* Badge */}
-        <motion.div variants={fadeInUp} className="mb-12">
-          <span className="text-accent-gold text-[10px] sm:text-xs font-bold uppercase tracking-[1em] block drop-shadow-[0_0_10px_var(--accent-gold-soft)]">
-            {t("lore.badge")}
+        <motion.div variants={fadeInUp} className="mb-20">
+          <span className="text-gold text-[10px] font-black uppercase tracking-[1em] block">
+            {t("lore.badge") || "The Chronicles"}
           </span>
+          <div className="w-px h-16 bg-gradient-to-b from-gold/50 to-transparent mx-auto mt-6" />
         </motion.div>
 
         {/* Section 1: Genesis */}
-        <div className="space-y-8 mb-20 sm:mb-28">
+        <div className="space-y-12 mb-32 lg:mb-40">
           <motion.h2 
             variants={fadeInUp}
-            className="text-3xl sm:text-5xl font-display tracking-tight text-text-primary uppercase"
+            className="text-5xl lg:text-7xl font-display tracking-tighter text-text-primary uppercase font-medium"
           >
-            {t("lore.genesis_title")}
+            {t("lore.genesis_title") || "Sacred Genesis"}
           </motion.h2>
           
-          <motion.div variants={fadeInUp} className="space-y-6 text-text-secondary text-base sm:text-lg font-light leading-relaxed font-sans">
+          <motion.div variants={fadeInUp} className="space-y-8 text-text-secondary text-[12px] lg:text-[14px] uppercase tracking-[0.25em] font-light leading-[2] max-w-2xl mx-auto">
             <p>
               {highlightText(t("lore.genesis_p1"))}
             </p>
-            <p className="text-text-muted italic">
+            <p className="text-gold opacity-80 font-medium italic">
               {t("lore.genesis_p2")}
             </p>
           </motion.div>
         </div>
 
         {/* Section 2: Sovereigns */}
-        <div className="space-y-8 mb-20 sm:mb-28">
+        <div className="space-y-12 mb-32 lg:mb-40">
           <motion.h2 
             variants={fadeInUp}
-            className="text-3xl sm:text-5xl font-display tracking-tight text-text-primary uppercase"
+            className="text-5xl lg:text-7xl font-display tracking-tighter text-text-primary uppercase font-medium"
           >
-            {t("lore.sovereigns_title")}
+            {t("lore.sovereigns_title") || "Imperial Lineage"}
           </motion.h2>
           
-          <motion.div variants={fadeInUp} className="space-y-6 text-text-secondary text-base sm:text-lg font-light leading-relaxed font-sans">
+          <motion.div variants={fadeInUp} className="space-y-8 text-text-secondary text-[12px] lg:text-[14px] uppercase tracking-[0.25em] font-light leading-[2] max-w-2xl mx-auto">
             <p>
               {t("lore.sovereigns_p1")}
             </p>
@@ -199,47 +132,47 @@ export default function Lore() {
         {/* Quote Section */}
         <motion.div 
           variants={{
-            hidden: { opacity: 0, scale: 0.95 },
+            hidden: { opacity: 0, scale: 0.98 },
             visible: { 
               opacity: 1, 
               scale: 1, 
-              transition: { duration: 1.5, ease: "easeOut" } 
+              transition: { duration: 1.5, ease: [0.16, 1, 0.3, 1] } 
             }
           }}
-          className="relative py-16 sm:py-24 px-8 sm:px-12 mb-20 sm:mb-28 overflow-hidden"
+          className="relative py-24 sm:py-32 px-10 sm:px-20 mb-32 lg:mb-40 overflow-hidden rounded-[80px]"
         >
-          <div className="absolute inset-0 bg-text-primary/[0.02] backdrop-blur-sm border-y border-accent-gold/20" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-accent-gold/5 blur-[100px]" />
+          <div className="absolute inset-0 bg-bg-card border border-gold/10" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gold/5 blur-[120px]" />
           
-          <p className="italic text-text-primary font-display text-2xl sm:text-4xl relative z-10 leading-snug drop-shadow-lg">
+          <p className="italic text-text-primary font-display text-3xl lg:text-5xl relative z-10 leading-[1.2] tracking-tight uppercase font-light">
             {highlightText(t("lore.quote"))}
           </p>
         </motion.div>
 
         {/* Section 3: The Bond */}
-        <div className="space-y-8 mb-20 sm:mb-28">
+        <div className="space-y-12 mb-32 lg:mb-40 text-center">
           <motion.h2 
             variants={fadeInUp}
-            className="text-3xl sm:text-5xl font-display tracking-tight text-text-primary uppercase"
+            className="text-5xl lg:text-7xl font-display tracking-tighter text-text-primary uppercase font-medium"
           >
-            {t("lore.bond_title")}
+            {t("lore.bond_title") || "The Eternal Bond"}
           </motion.h2>
           
-          <motion.div variants={fadeInUp} className="space-y-6 text-text-secondary text-base sm:text-lg font-light leading-relaxed font-sans text-center">
+          <motion.div variants={fadeInUp} className="space-y-8 text-text-secondary text-[12px] lg:text-[14px] uppercase tracking-[0.25em] font-light leading-[2] max-w-2xl mx-auto">
             <p>
               {t("lore.bond_p1")}
             </p>
-            <p className="text-accent-gold font-bold tracking-[0.2em] text-sm uppercase">
+            <p className="text-gold font-black tracking-[0.4em] text-[10px] uppercase underline underline-offset-8 decoration-gold/20">
               {t("lore.bond_p2")}
             </p>
             <p>
               {t("lore.bond_p3")}
             </p>
-            <div className="pt-8 space-y-4">
+            <div className="pt-10 space-y-6">
               <p>
                 {t("lore.bond_p4")}
               </p>
-              <p className="text-text-primary">
+              <p className="text-text-primary font-medium">
                 {t("lore.bond_p5")}
               </p>
             </div>
@@ -249,27 +182,28 @@ export default function Lore() {
         {/* Call to Action */}
         <motion.div 
           variants={fadeInUp}
-          className="pt-12 sm:pt-16"
+          className="pt-16 pb-24"
         >
-          <div className="inline-block p-[0.5px] bg-gradient-to-r from-transparent via-accent-gold/50 to-transparent rounded-full hover:via-accent-gold transition-all duration-700 group">
-            <div className="px-12 sm:px-16 py-4 sm:py-5 bg-bg-primary rounded-full text-[10px] sm:text-xs font-bold tracking-[0.4em] text-accent-gold uppercase group-hover:bg-accent-gold group-hover:text-black transition-all cursor-pointer whitespace-nowrap shadow-[0_0_40px_rgba(212,175,55,0.15)]">
-              {t("lore.cta")}
-            </div>
-          </div>
+          <motion.button 
+             whileHover={{ y: -5 }}
+             whileTap={{ scale: 0.98 }}
+             className="btn-primary font-black uppercase tracking-[0.5em] text-[10px] px-20 py-6 !rounded-[24px]"
+          >
+            {t("lore.cta") || "Begin Journey"}
+          </motion.button>
         </motion.div>
       </motion.div>
 
       {/* Cinematic Background Elements */}
       <motion.div 
-        style={{ y: useTransform(scrollYProgress, [0, 1], ["10%", "-10%"]) }}
-        className="absolute inset-x-[-10%] top-1/2 -translate-y-1/2 opacity-[0.02] hidden lg:block select-none pointer-events-none"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]) }}
+        className="absolute inset-x-[-5%] top-1/2 -translate-y-1/2 opacity-[0.015] hidden xl:block select-none pointer-events-none"
       >
-        <span className="text-[25rem] font-display font-black inline-block text-text-primary">{t("lore.title")}</span>
+        <span className="text-[35rem] font-display font-black inline-block text-text-primary leading-none uppercase tracking-tighter">{t("lore.title") || "ARCHIVE"}</span>
       </motion.div>
 
       {/* Floating Dust Particles (Vibe) */}
       <div className="absolute inset-0 z-[2] opacity-20 pointer-events-none mix-blend-screen bg-noise" />
     </section>
->>>>>>> 17e96eb (first commit)
   );
 }

@@ -138,8 +138,6 @@ export const nftDatabase: Record<string, NFTMetadata[]> = {
         { trait_type: "Tribe", value: "Java" },
         { trait_type: "Status", value: "Noble" }
       ]
-<<<<<<< HEAD
-=======
     },
     {
       id: 50,
@@ -156,7 +154,6 @@ export const nftDatabase: Record<string, NFTMetadata[]> = {
         { trait_type: "Island", value: "Java" },
         { trait_type: "Status", value: "Divine Avatar" }
       ]
->>>>>>> 17e96eb (first commit)
     }
   ],
   BALI_NUSA_TENGGARA: [

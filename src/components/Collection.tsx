@@ -1,58 +1,15 @@
 import { motion, AnimatePresence } from "motion/react";
-import { X, ExternalLink, Zap, Globe, Sparkles } from "lucide-react";
-<<<<<<< HEAD
-import { useState, useMemo } from "react";
-import { nftDatabase } from "../data/nftDatabase";
-=======
+import { X, ExternalLink, Zap, Globe, Sparkles, ShieldCheck } from "lucide-react";
 import { useState, useMemo, useEffect, useCallback, memo } from "react";
 import { useTranslation } from "../context/LanguageContext";
 import { nftDatabase } from "../data/nftDatabase";
 import { useWallet } from "../context/WalletContext";
 import MintModal from "./MintModal";
->>>>>>> 17e96eb (first commit)
 import { NFTMetadata } from "../types";
 import { RARITY_CONFIG } from "../data/rarityConfig";
 import { getFinalRarity } from "../data/rarityUpgrade";
 import NFTGrid from "./nft/NFTGrid";
 import FilterBar from "./nft/FilterBar";
-<<<<<<< HEAD
-import { NFTImage } from "./nft/NFTCard";
-
-export default function Collection() {
-  const [selectedNFT, setSelectedNFT] = useState<NFTMetadata | null>(null);
-  const [search, setSearch] = useState("");
-  const [activeIsland, setActiveIsland] = useState("All");
-  const [activeRarity, setActiveRarity] = useState("All");
-
-  const islands = Object.keys(nftDatabase);
-  const rarities = ["Divine", "Mythic", "Legendary", "Epic", "Rare", "Common"];
-
-  const allNFTs = useMemo(() => {
-    return Object.values(nftDatabase).flat();
-  }, []);
-
-  const filteredNFTs = useMemo(() => {
-    return allNFTs.filter((nft) => {
-      const finalRarity = getFinalRarity(nft);
-      const matchesSearch = 
-        nft.name.toLowerCase().includes(search.toLowerCase()) ||
-        nft.tribe.toLowerCase().includes(search.toLowerCase()) ||
-        nft.outfit.toLowerCase().includes(search.toLowerCase()) ||
-        nft.description.toLowerCase().includes(search.toLowerCase());
-      
-      const matchesIsland = activeIsland === "All" || nft.island.toUpperCase() === activeIsland;
-      const matchesRarity = activeRarity === "All" || finalRarity === activeRarity;
-
-      return matchesSearch && matchesIsland && matchesRarity;
-    });
-  }, [allNFTs, search, activeIsland, activeRarity]);
-
-  return (
-    <div className="relative">
-      {/* Background Decorative Elements */}
-      <div className="absolute top-0 inset-inline-start-0 w-full h-px bg-gradient-to-r from-transparent via-luxury-gold/20 to-transparent" />
-      <div className="absolute bottom-0 inset-inline-start-0 w-full h-px bg-gradient-to-r from-transparent via-luxury-purple/20 to-transparent" />
-=======
 import NFTCard, { NFTImage } from "./nft/NFTCard";
 import SafeImage from "./ui/SafeImage";
 
@@ -109,14 +66,8 @@ const Collection = memo(() => {
   }, [activeIsland, activeRarity, search]); // Re-trigger loading on filter change to show off skeletons
 
   // Update visible items on scroll for simple virtualization/lazy loading
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 500) {
-        setVisibleCount(prev => prev + 12);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  const handleLoadMore = useCallback(() => {
+    setVisibleCount(prev => prev + 12);
   }, []);
 
   const islands = useMemo(() => Object.keys(nftDatabase), []);
@@ -267,7 +218,6 @@ const Collection = memo(() => {
       {/* Background Decorative Elements */}
       <div className="absolute top-0 inset-inline-start-0 w-full h-px bg-gradient-to-r from-transparent via-accent-gold/20 to-transparent" />
       <div className="absolute bottom-0 inset-inline-start-0 w-full h-px bg-gradient-to-r from-transparent via-accent-purple/20 to-transparent" />
->>>>>>> 17e96eb (first commit)
       
       <div className="w-full">
         {/* Header Section */}
@@ -276,17 +226,10 @@ const Collection = memo(() => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-<<<<<<< HEAD
-            className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-luxury-gold/10 border border-luxury-gold/20 mb-6"
-          >
-            <Sparkles className="w-3 h-3 text-luxury-gold" />
-            <span className="text-[10px] font-black uppercase tracking-[0.4em] text-luxury-gold">Genesis Edition</span>
-=======
             className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-accent-gold-soft border border-accent-gold-soft mb-6"
           >
             <Sparkles className="w-3 h-3 text-accent-gold" />
             <span className="text-[10px] font-black uppercase tracking-[0.4em] text-accent-gold">{t("collection.badge")}</span>
->>>>>>> 17e96eb (first commit)
           </motion.div>
           
           <motion.h2 
@@ -294,15 +237,9 @@ const Collection = memo(() => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-<<<<<<< HEAD
-            className="text-5xl md:text-8xl font-display text-white mb-6 uppercase tracking-tighter"
-          >
-            Nusantara <span className="gold-text">Eterna</span>
-=======
             className="text-5xl md:text-8xl font-display text-text-primary mb-6 uppercase tracking-tighter"
           >
             {t("hero.title_3")} <span className="gold-text">{t("rarity.divine")}</span>
->>>>>>> 17e96eb (first commit)
           </motion.h2>
           
           <motion.p
@@ -310,16 +247,9 @@ const Collection = memo(() => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-<<<<<<< HEAD
-            className="text-white/40 max-w-2xl mx-auto text-sm md:text-lg font-light leading-relaxed"
-          >
-            Explore the royal heritage of Indonesia through our meticulously crafted NFT collection. 
-            Each piece represents a unique chapter of traditional identity, woven into the spirit of the Royal Raccoon.
-=======
             className="text-text-secondary max-w-2xl mx-auto text-sm md:text-lg font-light leading-relaxed"
           >
             {t("collection.adjust_filters")}
->>>>>>> 17e96eb (first commit)
           </motion.p>
         </div>
 
@@ -331,30 +261,6 @@ const Collection = memo(() => {
           setActiveIsland={setActiveIsland}
           activeRarity={activeRarity}
           setActiveRarity={setActiveRarity}
-<<<<<<< HEAD
-          islands={islands}
-          rarities={rarities}
-        />
-
-        {/* Results Info */}
-        <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/5">
-          <div className="text-[10px] uppercase font-bold tracking-widest text-white/30">
-            Showing <span className="text-white">{filteredNFTs.length}</span> Assets
-          </div>
-          <div className="flex items-center gap-4 text-[10px] uppercase font-bold tracking-widest text-white/30">
-            Sorted by: <span className="text-luxury-gold">Divine Rarity</span>
-          </div>
-        </div>
-
-        {/* NFT Grid */}
-        <NFTGrid nfts={filteredNFTs} onSelect={setSelectedNFT} />
-
-        {/* Empty State */}
-        {filteredNFTs.length === 0 && (
-          <div className="py-24 text-center">
-            <h3 className="text-3xl font-display text-white mb-4">No Warriors Found</h3>
-            <p className="text-white/30">Try adjusting your filters or search terms.</p>
-=======
           sortBy={sortBy}
           setSortBy={setSortBy}
           islands={islands}
@@ -365,53 +271,44 @@ const Collection = memo(() => {
         />
 
         {/* Collection Info Bar */}
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-8 p-4 md:p-6 bg-bg-secondary border border-border-soft rounded-3xl backdrop-blur-xl z-10 relative shadow-sm">
-          <div className="flex items-center gap-6">
-            <div className="relative w-32 h-auto rounded-2xl overflow-hidden p-1">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 mb-12 p-8 bg-bg-card/40 border border-border-soft rounded-[32px] backdrop-blur-xl relative shadow-2xl">
+          <div className="flex items-center gap-8">
+            <div className="relative w-36 h-auto rounded-2xl overflow-hidden shadow-2xl p-0.5 bg-gradient-to-br from-gold/30 to-transparent">
               <SafeImage 
-                src="https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafkreig3ck347noh2ur3oi2amnfpubycc7mmdleexjld7ggwpp7paiwwtq" 
-                alt="Nusantara Eterna Logo" 
-                className="w-full h-auto object-contain rounded-xl"
+                 src="https://ivory-magnificent-caterpillar-957.mypinata.cloud/ipfs/bafkreig3ck347noh2ur3oi2amnfpubycc7mmdleexjld7ggwpp7paiwwtq" 
+                 alt="Nusantara Eterna Logo" 
+                 className="w-full h-auto object-contain rounded-[14px]"
               />
             </div>
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <h1 className="text-2xl font-display text-text-primary uppercase tracking-tight">Nusantara Eterna</h1>
-                <div className="w-4 h-4 bg-blue-500 rounded-full flex items-center justify-center">
-                  <motion.div 
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                    className="text-[10px] text-white"
-                  >✓</motion.div>
-                </div>
+              <div className="flex items-center gap-4 mb-2">
+                <h1 className="text-3xl md:text-4xl font-display font-medium text-text-primary uppercase tracking-tight">Nusantara Eterna</h1>
+                <div className="px-3 py-1 bg-gold/10 text-gold text-[8px] font-black uppercase tracking-widest rounded-full border border-gold/20">Royal Verified</div>
               </div>
-              <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-text-muted">
-                <span>7,777 {t("marketplace.items") || "Items"}</span>
+              <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted">
+                <span>7,777 Unique Assets</span>
                 <span>•</span>
-                <span>0.02 ETH {t("nft.mint") || "Mint"}</span>
+                <span>Established Lineage</span>
               </div>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 lg:gap-12 w-full lg:w-auto">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-12 lg:gap-16 w-full lg:w-auto">
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-1">{t("marketplace.floor_price")}</span>
-              <div className="flex items-center gap-2">
-                <span className="text-xl font-bold text-text-primary">{stats.floorPrice} ETH</span>
-                <span className="text-[10px] text-status-success font-bold">+12.4%</span>
-              </div>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-2">Floor Price</span>
+              <span className="text-2xl font-display font-medium text-text-primary">{stats.floorPrice} ETH</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-1">{t("marketplace.offer")}</span>
-              <span className="text-xl font-bold text-text-primary">{stats.topOffer} ETH</span>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-2">High Offer</span>
+              <span className="text-2xl font-display font-medium text-text-primary">{stats.topOffer} ETH</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-1">24h {t("marketplace.volume") || "Vol"}</span>
-              <span className="text-xl font-bold text-text-primary">{stats.vol24h}</span>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-2">Circulation</span>
+              <span className="text-2xl font-display font-medium text-text-primary">{stats.vol24h}</span>
             </div>
             <div className="flex flex-col">
-              <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-1">{t("marketplace.owners")}</span>
-              <span className="text-xl font-bold text-text-primary">{stats.owners}</span>
+              <span className="text-[10px] font-bold text-text-muted uppercase tracking-[0.2em] mb-2">Holders</span>
+              <span className="text-2xl font-display font-medium text-text-primary">{stats.owners}</span>
             </div>
           </div>
         </div>
@@ -495,9 +392,12 @@ const Collection = memo(() => {
                 </div>
               ) : (
                 <NFTGrid 
-                  nfts={isDataLoading ? [] : filteredAndSortedNFTs} 
+                  nfts={isDataLoading ? [] : visibleNFTs} 
+                  totalCount={filteredAndSortedNFTs.length}
                   onSelect={setSelectedNFT} 
+                  onLoadMore={handleLoadMore}
                   loading={isDataLoading}
+                  view={viewMode}
                 />
               )}
             </div>
@@ -505,7 +405,6 @@ const Collection = memo(() => {
         ) : (
           <div className="py-20 text-center bg-bg-card border border-border-soft rounded-3xl shadow-sm">
              <h3 className="text-xl text-text-muted font-display uppercase tracking-widest">{activeTab} section coming soon</h3>
->>>>>>> 17e96eb (first commit)
           </div>
         )}
       </div>
@@ -519,165 +418,102 @@ const Collection = memo(() => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedNFT(null)}
-<<<<<<< HEAD
-              className="absolute inset-0 bg-black/90 backdrop-blur-3xl"
-=======
               className="absolute inset-0 bg-bg-primary/95 backdrop-blur-3xl"
->>>>>>> 17e96eb (first commit)
             />
             
             <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 40 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 40 }}
-<<<<<<< HEAD
-              className="relative w-full max-w-6xl bg-[#0a0a0a] rounded-[2.5rem] border border-white/10 overflow-hidden flex flex-col lg:flex-row shadow-3xl max-h-[90vh] lg:max-h-none"
-=======
-              className="relative w-full max-w-6xl bg-bg-primary rounded-[2.5rem] border border-border-soft overflow-hidden flex flex-col lg:flex-row shadow-3xl max-h-[90vh] lg:max-h-none"
->>>>>>> 17e96eb (first commit)
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative w-full max-w-6xl bg-bg-primary rounded-[32px] border border-border-soft overflow-hidden flex flex-col lg:flex-row shadow-3xl overflow-y-auto max-h-[90vh]"
             >
               {/* Close Button */}
               <button 
                 onClick={() => setSelectedNFT(null)}
-<<<<<<< HEAD
-                className="absolute top-6 inset-inline-end-6 z-50 p-3 bg-white/5 hover:bg-white/10 rounded-full border border-white/10 transition-all text-white"
-=======
-                className="absolute top-6 inset-inline-end-6 z-50 p-3 bg-bg-card hover:bg-bg-secondary rounded-full border border-border-soft transition-all text-text-primary"
->>>>>>> 17e96eb (first commit)
+                className="absolute top-6 right-6 z-50 p-4 bg-bg-card/80 backdrop-blur-md hover:bg-bg-secondary rounded-full border border-border-soft transition-all text-text-primary"
               >
-                <X className="w-6 h-6" />
+                <X className="w-5 h-5" />
               </button>
 
               {/* Image Side */}
-              <div className="w-full lg:w-1/2 relative bg-black flex items-center justify-center overflow-hidden min-h-[400px] lg:min-h-0">
+              <div className="w-full lg:w-1/2 relative bg-black flex items-center justify-center overflow-hidden min-h-[400px]">
                 <NFTImage 
                   src={selectedNFT.image} 
                   alt={selectedNFT.name}
                   className="w-full h-full object-cover"
                 />
-                
-                {/* Rarity Glow Aura */}
-                <div className={`absolute inset-0 bg-gradient-to-t ${RARITY_CONFIG[getFinalRarity(selectedNFT)].gradient} opacity-40 mix-blend-screen pointer-events-none`} />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
               </div>
 
               {/* Info Side */}
-<<<<<<< HEAD
-              <div className="w-full lg:w-1/2 p-10 md:p-14 overflow-y-auto bg-luxury-black/50">
-=======
-              <div className="w-full lg:w-1/2 p-10 md:p-14 overflow-y-auto bg-bg-secondary/50">
->>>>>>> 17e96eb (first commit)
-                <div className="space-y-10">
+              <div className="w-full lg:w-1/2 p-8 md:p-12 bg-bg-secondary/30 backdrop-blur-sm">
+                <div className="space-y-8">
                   {/* Badge & ID */}
-                  <div className="flex items-center gap-4">
-                    <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${RARITY_CONFIG[getFinalRarity(selectedNFT)].badge}`}>
-<<<<<<< HEAD
+                  <div className="flex items-center justify-between">
+                    <span className={`px-4 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${RARITY_CONFIG[getFinalRarity(selectedNFT)].badge}`}>
                       {getFinalRarity(selectedNFT)}
                     </span>
-                    <span className="text-white/20 font-mono text-sm tracking-widest uppercase">ID: #{selectedNFT.id.toString().padStart(5, '0')}</span>
-=======
-                      {t(`rarity.${getFinalRarity(selectedNFT).toLowerCase()}`) || getFinalRarity(selectedNFT)}
-                    </span>
-                    <span className="text-text-muted font-mono text-sm tracking-widest uppercase">{t("details.archive_id")}: #{selectedNFT.id.toString().padStart(5, '0')}</span>
->>>>>>> 17e96eb (first commit)
+                    <span className="text-text-muted font-mono text-xs tracking-widest">#{selectedNFT.id.toString().padStart(5, '0')}</span>
                   </div>
 
                   {/* Title */}
                   <div>
-<<<<<<< HEAD
-                    <h2 className="text-5xl md:text-7xl font-display text-white mb-4 uppercase tracking-tighter leading-none">
+                    <h2 className="text-4xl md:text-5xl font-display font-medium text-text-primary mb-4 uppercase tracking-tight">
                       {selectedNFT.name.split('—')[0]}
                     </h2>
-                    <div className="flex items-center gap-3 text-luxury-gold uppercase tracking-[0.5em] text-[10px] font-bold">
-=======
-                    <h2 className="text-5xl md:text-7xl font-display text-text-primary mb-4 uppercase tracking-tighter leading-none">
-                      {selectedNFT.name.split('—')[0]}
-                    </h2>
-                    <div className="flex items-center gap-3 text-accent-gold uppercase tracking-[0.5em] text-[10px] font-bold">
->>>>>>> 17e96eb (first commit)
+                    <div className="flex items-center gap-3 text-gold uppercase tracking-[0.4em] text-[9px] font-bold">
                        <Globe className="w-3 h-3" />
                        {selectedNFT.island} • {selectedNFT.tribe}
                     </div>
                   </div>
 
-                  {/* Meta Info */}
-<<<<<<< HEAD
-                  <div className="p-6 bg-white/[0.03] border border-white/5 rounded-3xl">
-                     <span className="text-[10px] text-white/20 uppercase tracking-widest font-black block mb-2">Heritage Origin</span>
-                     <p className="text-white/80 text-lg font-light leading-relaxed">
-=======
-                  <div className="p-6 bg-bg-card border border-border-soft rounded-3xl">
-                     <span className="text-[10px] text-text-muted uppercase tracking-widest font-black block mb-2">{t("details.heritage_origin") || "Heritage Origin"}</span>
-                     <p className="text-text-primary text-lg font-light leading-relaxed">
->>>>>>> 17e96eb (first commit)
-                        {selectedNFT.cultural_meta}
-                     </p>
-                  </div>
-
-                  {/* Description */}
-                  <div className="space-y-4">
-<<<<<<< HEAD
-                     <h4 className="text-[10px] text-white/30 uppercase tracking-[0.3em] font-black">Philosophical Chronicle</h4>
-                     <p className="text-white/60 leading-relaxed font-light text-lg">
-=======
-                     <h4 className="text-[10px] text-text-muted uppercase tracking-[0.3em] font-black">{t("details.chronicles")}</h4>
-                     <p className="text-text-secondary leading-relaxed font-light text-lg">
->>>>>>> 17e96eb (first commit)
-                        {selectedNFT.description}
-                     </p>
-                  </div>
-
                   {/* Attributes Grid */}
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {selectedNFT.attributes.map((attr, idx) => (
-<<<<<<< HEAD
-                      <div key={idx} className="p-4 bg-white/[0.02] border border-white/5 rounded-2xl flex flex-col items-center text-center">
-                        <span className="text-[8px] text-white/30 uppercase tracking-[0.2em] mb-1 font-bold">{attr.trait_type}</span>
-                        <span className="text-[10px] font-bold text-white uppercase tracking-wider">{attr.value}</span>
-=======
-                      <div key={idx} className="p-4 bg-bg-card border border-border-soft rounded-2xl flex flex-col items-center text-center">
-                        <span className="text-[8px] text-text-muted uppercase tracking-[0.2em] mb-1 font-bold">{attr.trait_type}</span>
-                        <span className="text-[10px] font-bold text-text-primary uppercase tracking-wider">{attr.value}</span>
->>>>>>> 17e96eb (first commit)
+                  <div className="grid grid-cols-2 gap-4">
+                    {selectedNFT.attributes.slice(0, 4).map((attr, idx) => (
+                      <div key={idx} className="p-4 bg-bg-card/50 border border-border-soft rounded-2xl">
+                        <span className="text-[8px] text-text-muted uppercase tracking-widest block mb-1">{attr.trait_type}</span>
+                        <span className="text-xs font-bold text-text-primary uppercase">{attr.value}</span>
                       </div>
                     ))}
                   </div>
 
-                  {/* Buy Now & OpenSea */}
-                  <div className="flex flex-col sm:flex-row items-center gap-4 pt-8">
-<<<<<<< HEAD
-                    <button className="w-full flex-1 py-5 bg-luxury-gold text-black rounded-2xl font-black uppercase tracking-[0.2em] text-xs hover:shadow-2xl hover:shadow-luxury-gold/40 transition-all active:scale-95 flex items-center justify-center gap-2">
-                      <Zap className="w-4 h-4 fill-current" />
-                      Mint Asset (0.85 ETH)
-=======
-                    <button 
-                      onClick={() => handleMint(selectedNFT.id.toString())}
-                      disabled={isMinting}
-                      className="btn-gold w-full flex-1 py-5 !rounded-2xl"
-                    >
-                      {isMinting ? (
-                        <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                      ) : (
-                        <Zap className="w-4 h-4 fill-current" />
-                      )}
-                      {isMinting ? t("nav.minting") : `${t("nft.mint")} (${getPrice(selectedNFT)} ETH)`}
->>>>>>> 17e96eb (first commit)
-                    </button>
-                    <a 
-                       href={`https://opensea.io/assets/ethereum/0x5678...4321/${selectedNFT.id}`}
-                       target="_blank"
-                       rel="noopener noreferrer"
-<<<<<<< HEAD
-                       className="w-full sm:w-auto px-8 py-5 border border-white/10 rounded-2xl text-white/60 hover:text-white hover:border-white/30 transition-all text-xs font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                      OpenSea
-=======
-                       className="w-full sm:w-auto px-8 py-5 border border-border-soft rounded-2xl text-text-muted hover:text-text-primary transition-all text-xs font-black uppercase tracking-[0.2em] flex items-center justify-center gap-2"
-                    >
-                      <ExternalLink className="w-5 h-5" />
-                      {t("marketplace.view_opensea")}
->>>>>>> 17e96eb (first commit)
-                    </a>
+                  {/* Heritage Description */}
+                  <div className="p-6 bg-bg-card/50 border border-border-soft rounded-2xl">
+                      <p className="text-text-secondary text-sm font-light leading-relaxed italic">
+                        "{selectedNFT.cultural_meta}"
+                      </p>
+                  </div>
+
+                  {/* Action */}
+                  <div className="pt-6 border-t border-border-soft">
+                    <div className="flex items-center justify-between mb-8">
+                       <div>
+                         <span className="text-[9px] text-text-muted uppercase tracking-widest block mb-1">Minting Fee</span>
+                         <span className="text-2xl font-display font-medium text-text-primary">{getPrice(selectedNFT)} ETH</span>
+                       </div>
+                       <div className="text-right">
+                          <span className="text-[9px] text-text-muted uppercase tracking-widest block mb-1">Verification</span>
+                          <ShieldCheck className="w-5 h-5 text-gold ml-auto" />
+                       </div>
+                    </div>
+
+                    <div className="flex gap-4">
+                      <button 
+                        onClick={() => handleMint(selectedNFT.id.toString())}
+                        disabled={isMinting}
+                        className="btn-primary flex-1 py-4 text-xs"
+                      >
+                        {isMinting ? t("nav.minting") : "Acquire Asset"}
+                      </button>
+                      <a 
+                         href={`https://opensea.io/assets/ethereum/0x5678...4321/${selectedNFT.id}`}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="flex items-center justify-center p-4 bg-white/5 border border-border-soft rounded-full text-text-muted hover:text-text-primary transition-all"
+                      >
+                        <ExternalLink className="w-5 h-5" />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -686,14 +522,9 @@ const Collection = memo(() => {
         )}
       </AnimatePresence>
     </div>
-<<<<<<< HEAD
-  );
-}
-=======
     );
 });
 
 Collection.displayName = "Collection";
 export default Collection;
->>>>>>> 17e96eb (first commit)
 

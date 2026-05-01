@@ -8,10 +8,7 @@ export default defineConfig(({mode}) => {
   return {
     plugins: [react(), tailwindcss()],
     define: {
-<<<<<<< HEAD
-=======
       global: 'window',
->>>>>>> 17e96eb (first commit)
       'process.env.GEMINI_API_KEY': JSON.stringify(env.GEMINI_API_KEY),
     },
     resolve: {
